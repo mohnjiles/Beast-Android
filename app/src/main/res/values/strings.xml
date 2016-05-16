@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Beast for GW2</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="api_key_help">Need help finding your API Key? <a href="https://account.arena.net/applications">Tap here to open the Guild Wars 2 API Key website.</a>
+        \n\nHow do I generate an API Key?
+        \n\nOn the Guild Wars 2 API key website, first login to your Guild Wars 2 account.
+        Then, click the "New Key" button, give your new API key a name, and select the permissions you would like to grant.
+        Finally, click Create API Key. Copy this API Key to your clipboard, and paste it into the textbox above, then click Save.
+        \n\nNote: In order for the app to function fully, you will need to allow all permissions for your API key.</string>
+</resources>
