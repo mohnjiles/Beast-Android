@@ -1,17 +1,16 @@
 
 package xyz.jtmiles.beastforgw2.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Specializations {
+public class Specializations implements Serializable {
 
     private List<Pve> pve = new ArrayList<Pve>();
     private List<Pvp> pvp = new ArrayList<Pvp>();
     private List<Wvw> wvw = new ArrayList<Wvw>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private static final long serialVersionUID = 0L;
 
     /**
      * 
@@ -67,12 +66,5 @@ public class Specializations {
         this.wvw = wvw;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

@@ -1,12 +1,11 @@
 
 package xyz.jtmiles.beastforgw2.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Character {
+public class Character implements Serializable {
 
     private String name;
     private String race;
@@ -17,15 +16,15 @@ public class Character {
     private Integer age;
     private String created;
     private Integer deaths;
-    private List<Crafting> crafting = new ArrayList<Crafting>();
+    private List<Crafting> crafting = new ArrayList<>();
     private Integer title;
     private Specializations specializations;
     private Skills skills;
-    private List<Equipment> equipment = new ArrayList<Equipment>();
-    private List<Integer> recipes = new ArrayList<Integer>();
+    private List<Equipment> equipment = new ArrayList<>();
+    private List<Integer> recipes = new ArrayList<>();
     private EquipmentPvp equipmentPvp;
-    private List<Bag> bags = new ArrayList<Bag>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private List<Bag> bags = new ArrayList<>();
+    private static final long serialVersionUID = 0L;
 
     /**
      * 
@@ -333,12 +332,5 @@ public class Character {
         this.bags = bags;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

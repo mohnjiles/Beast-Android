@@ -1,15 +1,14 @@
 
 package xyz.jtmiles.beastforgw2.models;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
-public class Skills {
+public class Skills implements Serializable {
 
     private Pve_ pve;
     private Pvp_ pvp;
     private Wvw_ wvw;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private static final long serialVersionUID = 0L;
 
     /**
      * 
@@ -63,14 +62,6 @@ public class Skills {
      */
     public void setWvw(Wvw_ wvw) {
         this.wvw = wvw;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

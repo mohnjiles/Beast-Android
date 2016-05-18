@@ -2,6 +2,7 @@ package xyz.jtmiles.beastforgw2.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,6 +27,14 @@ public class MainActivity extends RoboActionBarActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
+    ActionBarDrawerToggle toggle;
+    public ActionBarDrawerToggle getToggle() {
+        return toggle;
+    }
+
+
+    private String mCurrentFragmentTag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +43,38 @@ public class MainActivity extends RoboActionBarActivity
 
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, SettingsFragment.newInstance(), "SettingsFragment")
-                .commit();
-        toolbar.setSubtitle("Settings");
+        if (savedInstanceState != null) {
+            String savedFragmentTag = savedInstanceState.getString("fragment_tag");
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(savedFragmentTag);
+
+            if (fragment != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, fragment, savedFragmentTag)
+                        .commit();
+                mCurrentFragmentTag = savedFragmentTag;
+            } else {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, CharactersFragment.newInstance(), "CharactersFragment")
+                        .commit();
+                mCurrentFragmentTag = "CharactersFragment";
+                toolbar.setSubtitle("Characters");
+            }
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, CharactersFragment.newInstance(), "CharactersFragment")
+                    .commit();
+            mCurrentFragmentTag = "CharactersFragment";
+            toolbar.setSubtitle("Characters");
+        }
+
 
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -55,6 +86,8 @@ public class MainActivity extends RoboActionBarActivity
         } else {
             super.onBackPressed();
         }
+        if (toggle != null)
+            toggle.setDrawerIndicatorEnabled(true);
     }
 
     @Override
@@ -66,16 +99,9 @@ public class MainActivity extends RoboActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (item.getItemId() == android.R.id.home) {
+            return false;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -89,15 +115,34 @@ public class MainActivity extends RoboActionBarActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, CharactersFragment.newInstance(), "CharactersFragment")
                     .commit();
+            mCurrentFragmentTag = "CharactersFragment";
         } else if (id == R.id.nav_bank) {
 
         } else if (id == R.id.nav_wallet) {
 
         } else if (id == R.id.nav_boss_timers) {
 
+        } else if (id == R.id.nav_settings) {
+            getSupportActionBar().setSubtitle("Settings");
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, SettingsFragment.newInstance(), "SettingsFragment")
+                    .commit();
+            mCurrentFragmentTag = "SettingsFragment";
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("fragment_tag", mCurrentFragmentTag);
+    }
+
+    public void setmCurrentFragmentTag(String mCurrentFragmentTag) {
+        this.mCurrentFragmentTag = mCurrentFragmentTag;
+    }
+
+
 }

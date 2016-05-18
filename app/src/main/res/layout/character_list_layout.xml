@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rlLayout"
+    android:background="#4e0909"
+    android:padding="8dp">
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/ivClassIcon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/revenant" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Darth Irrevenant"
+        android:id="@+id/tvCharacterName"
+        android:layout_alignTop="@+id/ivClassIcon"
+        android:layout_toRightOf="@+id/ivClassIcon"
+        android:layout_toEndOf="@+id/ivClassIcon"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="80 Norn Revenant"
+        android:id="@+id/tvCharacterInfo"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#a8a8a8"
+        android:layout_below="@+id/tvCharacterName"
+        android:layout_alignLeft="@+id/tvCharacterName"
+        android:layout_alignStart="@+id/tvCharacterName" />
+</RelativeLayout>

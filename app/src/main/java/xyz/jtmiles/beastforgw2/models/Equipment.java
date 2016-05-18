@@ -1,19 +1,18 @@
 
 package xyz.jtmiles.beastforgw2.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Equipment {
+public class Equipment implements Serializable {
 
     private Integer id;
     private String slot;
     private List<Integer> infusions = new ArrayList<Integer>();
     private List<Integer> upgrades = new ArrayList<Integer>();
     private Integer skin;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private static final long serialVersionUID = 0L;
 
     /**
      * 
@@ -103,14 +102,6 @@ public class Equipment {
      */
     public void setSkin(Integer skin) {
         this.skin = skin;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

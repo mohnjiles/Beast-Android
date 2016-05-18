@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.CharacterDetailFragment"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Darth Irrevenant"
+        android:id="@+id/tvCharacterName"
+        android:fontFamily="sans-serif-light"
+        android:textSize="28sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ivClassIcon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Norn Herald"
+        android:id="@+id/tvCharacterRaceClass"
+        android:fontFamily="sans-serif-light"
+        android:textSize="22sp"
+        android:layout_below="@+id/tvCharacterName"
+        android:layout_toRightOf="@+id/ivClassIcon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/ivClassIcon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="4dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rvStats"
+        android:layout_below="@+id/ivClassIcon"
+        android:layout_marginTop="16dp" />
+
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Created 3 months 2 weeks ago"-->
+        <!--android:id="@+id/tvCreated"-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_below="@+id/tvGuildName"-->
+        <!--android:layout_marginTop="8dp" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:id="@+id/tvGuildName"-->
+        <!--android:textSize="18sp"-->
+        <!--android:layout_below="@+id/ivClassIcon"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:textIsSelectable="false" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Played for over 9000 hours"-->
+        <!--android:id="@+id/tvTimePlayed"-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_below="@+id/tvCreated"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="8dp" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Died over 9000 times"-->
+        <!--android:id="@+id/tvDeaths"-->
+        <!--android:textSize="16sp"-->
+        <!--android:layout_below="@+id/tvTimePlayed"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginTop="8dp" />-->
+
+</RelativeLayout>

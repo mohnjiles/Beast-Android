@@ -1,11 +1,13 @@
 package xyz.jtmiles.beastforgw2.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +21,15 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import roboguice.activity.RoboActionBarActivity;
 import roboguice.fragment.RoboFragment;
 import xyz.jtmiles.beastforgw2.R;
+import xyz.jtmiles.beastforgw2.VerticalSpaceItemDecoration;
+import xyz.jtmiles.beastforgw2.activities.CharacterDetailActivity;
+import xyz.jtmiles.beastforgw2.adapters.CharactersAdapter;
 import xyz.jtmiles.beastforgw2.managers.CharactersManager;
 import xyz.jtmiles.beastforgw2.models.Character;
+import xyz.jtmiles.beastforgw2.util.RecyclerItemClickListener;
 
 
 /**
@@ -64,18 +71,29 @@ public class CharactersFragment extends RoboFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ActionBar actionBar = ((RoboActionBarActivity)getActivity()).getSupportActionBar();
+        if (actionBar != null)
+            actionBar.setSubtitle("Characters");
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        rvCharacters.setLayoutManager(layoutManager);
+        rvCharacters.addItemDecoration(new VerticalSpaceItemDecoration(48));
+
         charactersManager.getAllCharacters(new Callback<List<Character>>() {
             @Override
-            public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
+            public void onResponse(Call<List<Character>> call, final Response<List<Character>> response) {
                 if (response.isSuccessful()){
-                    StringBuilder sb = new StringBuilder();
+                    CharactersAdapter adapter = new CharactersAdapter(getActivity(), response.body());
 
-                    for (Character character : response.body()) {
-                        sb.append(character.getName());
-                        sb.append(", ");
-                    }
-
-                    Log.d("CharactersFragment", sb.toString());
+                    rvCharacters.setAdapter(adapter);
+                    rvCharacters.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Intent intent = new Intent(getActivity(), CharacterDetailActivity.class);
+                            intent.putExtra("character", response.body().get(position));
+                            startActivity(intent);
+                        }
+                    }));
                 }
             }
 

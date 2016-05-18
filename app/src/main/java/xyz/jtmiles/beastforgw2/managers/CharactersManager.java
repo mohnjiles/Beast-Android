@@ -26,7 +26,7 @@ public class CharactersManager {
     private CharactersService charactersService;
 
     public CharactersManager() {
-        charactersService = Utils.getRetrofit().create(CharactersService.class);
+        charactersService = Utils.getRetrofit(true).create(CharactersService.class);
     }
 
     public void getCharacterByName(String name, Callback<Character> callback) {

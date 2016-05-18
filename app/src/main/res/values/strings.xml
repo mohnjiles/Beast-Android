@@ -14,4 +14,6 @@
         Then, click the "New Key" button, give your new API key a name, and select the permissions you would like to grant.
         Finally, click Create API Key. Copy this API Key to your clipboard, and paste it into the textbox above, then click Save.
         \n\nNote: In order for the app to function fully, you will need to allow all permissions for your API key.</string>
+    <string name="title_activity_character_detail">CharacterDetailActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

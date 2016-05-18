@@ -1,17 +1,16 @@
 
 package xyz.jtmiles.beastforgw2.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Bag {
+public class Bag implements Serializable {
 
     private Integer id;
     private Integer size;
     private List<Inventory> inventory = new ArrayList<Inventory>();
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private static final long serialVersionUID = 0L;
 
     /**
      * 
@@ -65,14 +64,6 @@ public class Bag {
      */
     public void setInventory(List<Inventory> inventory) {
         this.inventory = inventory;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }
