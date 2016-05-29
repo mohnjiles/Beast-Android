@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.ItemDetailActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".activities.ItemDetailActivity"
+        tools:showIn="@layout/activity_item_detail"
+        android:padding="16dp"
+        >
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/ivItemIcon"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:padding="1dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/tvItemName"
+            android:layout_alignBottom="@+id/ivItemIcon"
+            android:layout_toRightOf="@+id/ivItemIcon"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="The Mechanism"
+            android:fontFamily="sans-serif-light" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weapon Strength:"
+            android:id="@+id/tvWepOrDefenseTitle"
+            android:layout_below="@+id/ivItemIcon"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="900 - 1100"
+            android:id="@+id/tvWepOrDefense"
+            android:textSize="16sp"
+            android:layout_alignTop="@+id/tvWepOrDefenseTitle"
+            android:layout_toRightOf="@+id/tvWepOrDefenseTitle"
+            android:layout_toEndOf="@+id/tvWepOrDefenseTitle"
+            android:layout_alignBottom="@+id/tvWepOrDefenseTitle"
+            android:layout_marginLeft="8dp"
+            android:textColor="#39c63c" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+77 Power"
+            android:id="@+id/tvStat1"
+            android:textSize="16sp"
+            android:textColor="#39c63c"
+            android:layout_below="@+id/tvWepOrDefenseTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+77 Precision"
+            android:id="@+id/tvStat2"
+            android:textSize="16sp"
+            android:textColor="#39c63c"
+            android:layout_below="@+id/tvStat1"
+            android:layout_alignLeft="@+id/tvStat1"
+            android:layout_alignStart="@+id/tvStat1"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+77 Toughness"
+            android:id="@+id/tvStat3"
+            android:textSize="16sp"
+            android:textColor="#39c63c"
+            android:layout_below="@+id/tvStat2"
+            android:layout_alignLeft="@+id/tvStat2"
+            android:layout_alignStart="@+id/tvStat2"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+77 Vitality"
+            android:id="@+id/tvStat4"
+            android:textSize="16sp"
+            android:textColor="#39c63c"
+            android:layout_below="@+id/tvStat3"
+            android:layout_alignLeft="@+id/tvStat3"
+            android:layout_alignStart="@+id/tvStat3"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+77 Condition Damage"
+            android:id="@+id/tvStat5"
+            android:textSize="16sp"
+            android:textColor="#39c63c"
+            android:layout_below="@+id/tvStat4"
+            android:layout_alignLeft="@+id/tvStat4"
+            android:layout_alignStart="@+id/tvStat4"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+77 Ferocity"
+            android:id="@+id/tvStat6"
+            android:textSize="16sp"
+            android:textColor="#39c63c"
+            android:layout_below="@+id/tvStat5"
+            android:layout_alignLeft="@+id/tvStat5"
+            android:layout_alignStart="@+id/tvStat5"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+77 Healing Power"
+            android:id="@+id/tvStat7"
+            android:textSize="16sp"
+            android:textColor="#39c63c"
+            android:layout_below="@+id/tvStat6"
+            android:layout_alignLeft="@+id/tvStat6"
+            android:layout_alignStart="@+id/tvStat6"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Required Level: 80"
+            android:id="@+id/tvRequiredLevel"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/tvType"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crafted in the style of the ancient Wupwup grawl tribe.  "
+            android:id="@+id/tvDescription"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#079cff"
+            android:layout_below="@+id/tvRequiredLevel"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Axe"
+            android:id="@+id/tvType"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/tvStat7"
+            android:layout_marginTop="8dp" />
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

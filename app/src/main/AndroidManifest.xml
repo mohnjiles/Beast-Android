@@ -29,6 +29,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="xyz.jtmiles.beastforgw2.activities.MainActivity" />
         </activity>
+        <activity android:name=".activities.ItemDetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.jtmiles.beastforgw2.activities.CharacterDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

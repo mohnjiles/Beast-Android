@@ -1,6 +1,7 @@
 package xyz.jtmiles.beastforgw2.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -12,9 +13,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import xyz.jtmiles.beastforgw2.R
+import xyz.jtmiles.beastforgw2.activities.ItemDetailActivity
 import xyz.jtmiles.beastforgw2.adapters.InventoryAdapter
 import xyz.jtmiles.beastforgw2.models.Inventory
 import xyz.jtmiles.beastforgw2.services.AccountService
+import xyz.jtmiles.beastforgw2.util.RecyclerItemClickListener
 import xyz.jtmiles.beastforgw2.util.Utils
 import xyz.jtmiles.beastforgw2.util.bindView
 
@@ -42,6 +45,11 @@ class BankFragment : Fragment() {
                 if (response.isSuccessful) {
                     val adapter = InventoryAdapter(activity, response.body())
                     rvBank.adapter = adapter
+                    rvBank.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
+                        val intent = Intent(activity, ItemDetailActivity::class.java)
+                        intent.putExtra("item", response.body()[pos])
+                        startActivity(intent)
+                    }));
                 }
             }
 

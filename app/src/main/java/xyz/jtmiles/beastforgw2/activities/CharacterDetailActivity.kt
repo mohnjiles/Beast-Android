@@ -42,8 +42,11 @@ class CharacterDetailActivity : AppCompatActivity() {
         tabLayout!!.setupWithViewPager(mViewPager)
 
         val intent = intent
-        val mCharacter = intent.extras.getSerializable("character") as Character
-        supportActionBar?.title = mCharacter.name
+        var mCharacter = intent.extras?.getSerializable("character")
+        if (mCharacter != null) {
+            mCharacter = mCharacter as Character
+            supportActionBar?.title = mCharacter.name
+        }
     }
 
 

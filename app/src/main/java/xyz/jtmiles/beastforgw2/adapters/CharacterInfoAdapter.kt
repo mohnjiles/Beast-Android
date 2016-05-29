@@ -56,8 +56,8 @@ class CharacterInfoAdapter(val mCharacter: Character) : RecyclerView.Adapter<Cha
                 holder.tvTitle.text = "Guild"
                 holder.rlLayout.setBackgroundColor(Color.parseColor("#F9A825"))
 
-                guildService?.getGuildDetails(String.format("https://api.guildwars2.com/v1/guild_details.json?guild_id=%s", mCharacter.guild))!!.enqueue(object : Callback<Guild> {
-                    override fun onResponse(call: Call<Guild>, response: Response<Guild>) {
+                guildService?.getGuildDetails("https://api.guildwars2.com/v1/guild_details.json?guild_id=${mCharacter.guild}")!!.enqueue(object : Callback<Guild> {
+                        override fun onResponse(call: Call<Guild>, response: Response<Guild>) {
                         if (response.isSuccessful) {
                             val guild = response.body()
                             holder.tvContent.text = String.format(Locale.getDefault(), "%s [%s]", guild.guildName, guild.tag)

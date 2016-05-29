@@ -1,6 +1,7 @@
 package xyz.jtmiles.beastforgw2.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -9,12 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import xyz.jtmiles.beastforgw2.R
+import xyz.jtmiles.beastforgw2.activities.ItemDetailActivity
 import xyz.jtmiles.beastforgw2.adapters.InventoryAdapter
 import xyz.jtmiles.beastforgw2.models.Character
 import xyz.jtmiles.beastforgw2.models.Inventory
+import xyz.jtmiles.beastforgw2.util.RecyclerItemClickListener
 import xyz.jtmiles.beastforgw2.util.bindView
 import java.util.*
-
 
 /**
  * A simple [Fragment] subclass.
@@ -59,6 +61,11 @@ class InventoryFragment : Fragment() {
 
         val adapter = InventoryAdapter(activity, itemList)
         rvInventory.adapter = adapter
+        rvInventory.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
+            val intent = Intent(activity, ItemDetailActivity::class.java)
+            intent.putExtra("item", itemList[pos])
+            startActivity(intent)
+        }));
 
     }
 
