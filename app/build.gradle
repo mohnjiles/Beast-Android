@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 23
@@ -22,11 +25,19 @@ android {
     packagingOptions {
         exclude 'META-INF/jersey-module-version'
     }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'src/main/java'
+    }
 }
 
 buildscript {
     repositories {
         mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
 
@@ -35,19 +46,25 @@ apply plugin: 'com.neenbedankt.android-apt'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    apt 'com.jakewharton:butterknife-compiler:8.0.1'
 
-    provided 'org.roboguice:roboblender:3.+'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:gridlayout-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
-    compile 'com.jakewharton:butterknife:8.0.1'
-    compile 'com.android.support:support-v4:23.4.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    compile 'org.roboguice:roboguice:3.+'
     compile 'com.android.support:palette-v7:23.4.0'
     compile 'org.ocpsoft.prettytime:prettytime:3.2.0.Final'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:support-v4:23.4.0'
+    compile 'org.jetbrains.anko:anko-sdk15:0.8.3'
+    compile 'org.jetbrains.anko:anko-support-v4:0.8.3'
+    compile 'org.jetbrains.anko:anko-appcompat-v7:0.8.3'
+    compile "org.jetbrains.anko:anko-recyclerview-v7:0.8.3"
+    compile "org.jetbrains.anko:anko-gridlayout-v7:0.8.3"
+    compile "org.jetbrains.anko:anko-design:0.8.3"
+
+}
+repositories {
+    mavenCentral()
 }

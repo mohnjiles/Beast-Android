@@ -13,7 +13,7 @@
         android:text="Darth Irrevenant"
         android:id="@+id/tvCharacterName"
         android:fontFamily="sans-serif-light"
-        android:textSize="28sp"
+        android:textSize="26sp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivClassIcon"
         android:layout_alignParentRight="true"

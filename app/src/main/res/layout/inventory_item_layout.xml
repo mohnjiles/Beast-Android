@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:id="@+id/ivItemIcon"
         android:src="@drawable/empty_inventory"
-        android:layout_margin="8dp" />
-</LinearLayout>
+        android:background="#000000"
+        android:padding="2dp"
+        android:layout_margin="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tvCount"
+        android:layout_alignRight="@+id/ivItemIcon"
+        android:layout_alignEnd="@+id/ivItemIcon"
+        android:layout_alignLeft="@+id/ivItemIcon"
+        android:layout_alignStart="@+id/ivItemIcon"
+        android:layout_alignBottom="@+id/ivItemIcon"
+        android:gravity="right"
+        android:paddingBottom="4dp"
+        android:paddingRight="6dp" />
+
+</RelativeLayout>
