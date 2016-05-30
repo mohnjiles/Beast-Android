@@ -48,6 +48,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:gridlayout-v7:23.4.0'
@@ -60,9 +61,11 @@ dependencies {
     compile 'org.jetbrains.anko:anko-sdk15:0.8.3'
     compile 'org.jetbrains.anko:anko-support-v4:0.8.3'
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.8.3'
-    compile "org.jetbrains.anko:anko-recyclerview-v7:0.8.3"
-    compile "org.jetbrains.anko:anko-gridlayout-v7:0.8.3"
-    compile "org.jetbrains.anko:anko-design:0.8.3"
+    compile 'org.jetbrains.anko:anko-recyclerview-v7:0.8.3'
+    compile 'org.jetbrains.anko:anko-gridlayout-v7:0.8.3'
+    compile 'org.jetbrains.anko:anko-design:0.8.3'
+    compile 'net.danlew:android.joda:2.9.3.1'
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.7.1-2"
 
 }
 repositories {

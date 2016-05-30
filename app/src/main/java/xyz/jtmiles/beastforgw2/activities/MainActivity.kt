@@ -10,10 +10,7 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import xyz.jtmiles.beastforgw2.R
-import xyz.jtmiles.beastforgw2.fragments.BankFragment
-import xyz.jtmiles.beastforgw2.fragments.CharactersFragment
-import xyz.jtmiles.beastforgw2.fragments.SettingsFragment
-import xyz.jtmiles.beastforgw2.fragments.WalletFragment
+import xyz.jtmiles.beastforgw2.fragments.*
 import xyz.jtmiles.beastforgw2.util.bindView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -100,7 +97,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             supportFragmentManager.beginTransaction().replace(R.id.container, WalletFragment.newInstance(), "WalletFragment").commit()
             mCurrentFragmentTag = "WalletFragment"
         } else if (id == R.id.nav_boss_timers) {
-
+            supportActionBar?.subtitle = "Boss Timers"
+            supportFragmentManager.beginTransaction().replace(R.id.container, BossTimerFragment.newInstance(), "BossTimerFragment").commit()
+            mCurrentFragmentTag = "BossTimerFragment"
         } else if (id == R.id.nav_settings) {
             supportActionBar?.subtitle = "Settings"
             supportFragmentManager.beginTransaction().replace(R.id.container, SettingsFragment.newInstance(), "SettingsFragment").commit()

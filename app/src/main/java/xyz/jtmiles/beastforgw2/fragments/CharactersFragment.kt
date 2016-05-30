@@ -57,7 +57,7 @@ class CharactersFragment : Fragment() {
 
         charactersManager.getAllCharacters(object : Callback<List<Character>> {
             override fun onResponse(call: Call<List<Character>>, response: Response<List<Character>>) {
-                if (response.isSuccessful) {
+                if (response.isSuccessful && activity != null) {
                     val adapter = CharactersAdapter(activity, response.body())
 
                     rvCharacters.adapter = adapter
