@@ -9,8 +9,16 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.fragments.*
+import xyz.jtmiles.beastforgw2.models.Account
+import xyz.jtmiles.beastforgw2.services.AccountService
+import xyz.jtmiles.beastforgw2.util.Utils
 import xyz.jtmiles.beastforgw2.util.bindView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -54,6 +62,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             toolbar.subtitle = "Characters"
         }
 
+        val navViewHeader: View = navigationView.getHeaderView(0)
+        val tvAccountName: TextView = navViewHeader.findViewById(R.id.tvAccountName) as TextView
+
+        val accountService = Utils.getRetrofit(true).create(AccountService::class.java)
+        accountService.getAccount(Utils.getApiKeyForAuth(this)).enqueue(object : Callback<Account> {
+            override fun onResponse(call: Call<Account>, response: Response<Account>) {
+                if (response.isSuccessful) {
+                    val account = response.body()
+                    tvAccountName.text = "${account.name}"
+                }
+            }
+
+            override fun onFailure(call: Call<Account>, t: Throwable) {
+
+            }
+        })
 
         navigationView.setNavigationItemSelectedListener(this)
     }
