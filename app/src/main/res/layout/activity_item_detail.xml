@@ -50,13 +50,11 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="8dp"
             android:gravity="center_vertical"
-            android:text="The Mechanism"
             android:fontFamily="sans-serif-light" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Weapon Strength:"
             android:id="@+id/tvWepOrDefenseTitle"
             android:layout_below="@+id/ivItemIcon"
             android:layout_alignParentLeft="true"
@@ -69,7 +67,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="900 - 1100"
             android:id="@+id/tvWepOrDefense"
             android:textSize="16sp"
             android:layout_alignTop="@+id/tvWepOrDefenseTitle"
@@ -82,7 +79,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+77 Power"
             android:id="@+id/tvStat1"
             android:textSize="16sp"
             android:textColor="#39c63c"
@@ -95,7 +91,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+77 Precision"
             android:id="@+id/tvStat2"
             android:textSize="16sp"
             android:textColor="#39c63c"
@@ -107,7 +102,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+77 Toughness"
             android:id="@+id/tvStat3"
             android:textSize="16sp"
             android:textColor="#39c63c"
@@ -119,7 +113,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+77 Vitality"
             android:id="@+id/tvStat4"
             android:textSize="16sp"
             android:textColor="#39c63c"
@@ -131,7 +124,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+77 Condition Damage"
             android:id="@+id/tvStat5"
             android:textSize="16sp"
             android:textColor="#39c63c"
@@ -143,7 +135,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+77 Ferocity"
             android:id="@+id/tvStat6"
             android:textSize="16sp"
             android:textColor="#39c63c"
@@ -155,7 +146,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+77 Healing Power"
             android:id="@+id/tvStat7"
             android:textSize="16sp"
             android:textColor="#39c63c"
@@ -167,7 +157,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Required Level: 80"
             android:id="@+id/tvRequiredLevel"
             android:textSize="16sp"
             android:fontFamily="sans-serif-light"
@@ -180,7 +169,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crafted in the style of the ancient Wupwup grawl tribe.  "
             android:id="@+id/tvDescription"
             android:textSize="16sp"
             android:fontFamily="sans-serif-light"
@@ -193,7 +181,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Axe"
             android:id="@+id/tvType"
             android:textSize="16sp"
             android:fontFamily="sans-serif-light"

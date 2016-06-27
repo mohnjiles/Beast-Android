@@ -12,7 +12,7 @@ public class Emblem {
     private Integer backgroundId;
     @SerializedName("foreground_id")
     private Integer foregroundId;
-    private List<Object> flags = new ArrayList<Object>();
+    private List<Object> flags = new ArrayList<>();
     @SerializedName("background_color_id")
     private Integer backgroundColorId;
     @SerializedName("foreground_primary_color_id")

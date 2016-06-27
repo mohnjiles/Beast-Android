@@ -9,7 +9,7 @@ public class EquipmentPvp implements Serializable {
 
     private Integer amulet;
     private Integer rune;
-    private List<Integer> sigils = new ArrayList<Integer>();
+    private List<Integer> sigils = new ArrayList<>();
     private static final long serialVersionUID = 0L;
 
     /**

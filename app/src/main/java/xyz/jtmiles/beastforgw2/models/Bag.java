@@ -9,7 +9,7 @@ public class Bag implements Serializable {
 
     private Integer id;
     private Integer size;
-    private List<Inventory> inventory = new ArrayList<Inventory>();
+    private List<Inventory> inventory = new ArrayList<>();
     private static final long serialVersionUID = 0L;
 
     /**

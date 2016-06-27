@@ -7,7 +7,7 @@ import java.util.List;
 public class InfixUpgrade {
 
     private Integer id;
-    private List<Attribute> attributes = new ArrayList<Attribute>();
+    private List<Attribute> attributes = new ArrayList<>();
 
     /**
      * 

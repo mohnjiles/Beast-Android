@@ -23,6 +23,7 @@ import xyz.jtmiles.beastforgw2.util.bindView
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.*
+import kotlin.concurrent.fixedRateTimer
 
 
 class BossTimerFragment : Fragment() {
@@ -44,6 +45,8 @@ class BossTimerFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         rvBossTimers.layoutManager = LinearLayoutManager(activity)
         loadWorldBosses()
+
+        val timer = fixedRateTimer("BossUpdateTask", false, 0.toLong(), 1000 * 60, {loadWorldBosses()})
     }
 
 
@@ -67,6 +70,7 @@ class BossTimerFragment : Fragment() {
 
             val json = sb.toString()
             if (mWorldBosses == null) mWorldBosses = ArrayList<WorldBoss>()
+            (mWorldBosses as ArrayList<WorldBoss>).clear()
             val worldBossesJsoned: List<WorldBossJson> = mapper.readValue(json)
 
             for(boss in worldBossesJsoned) {
@@ -87,7 +91,7 @@ class BossTimerFragment : Fragment() {
 
             }
 
-            val sortedBosses = (mWorldBosses as ArrayList<WorldBoss>).sortedBy { x -> x.start }.groupBy { it.eventName }.map { it.value.firstOrNull() }
+            val sortedBosses = (mWorldBosses as ArrayList<WorldBoss>).sortedBy { x -> x.end }.groupBy { it.eventName }.map { it.value.firstOrNull() }
 
             uiThread {
                 rvBossTimers.adapter = BossTimerAdapter(sortedBosses)

@@ -9,8 +9,8 @@ public class Equipment implements Serializable {
 
     private Integer id;
     private String slot;
-    private List<Integer> infusions = new ArrayList<Integer>();
-    private List<Integer> upgrades = new ArrayList<Integer>();
+    private List<Integer> infusions = new ArrayList<>();
+    private List<Integer> upgrades = new ArrayList<>();
     private Integer skin;
     private static final long serialVersionUID = 0L;
 

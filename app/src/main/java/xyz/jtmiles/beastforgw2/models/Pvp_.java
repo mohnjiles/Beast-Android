@@ -8,9 +8,9 @@ import java.util.List;
 public class Pvp_ implements Serializable {
 
     private Integer heal;
-    private List<Integer> utilities = new ArrayList<Integer>();
+    private List<Integer> utilities = new ArrayList<>();
     private Integer elite;
-    private List<String> legends = new ArrayList<String>();
+    private List<String> legends = new ArrayList<>();
     private static final long serialVersionUID = 0L;
 
     /**

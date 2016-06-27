@@ -8,7 +8,7 @@ import java.util.List;
 public class Wvw implements Serializable {
 
     private Integer id;
-    private List<Integer> traits = new ArrayList<Integer>();
+    private List<Integer> traits = new ArrayList<>();
     private static final long serialVersionUID = 0L;
 
     /**

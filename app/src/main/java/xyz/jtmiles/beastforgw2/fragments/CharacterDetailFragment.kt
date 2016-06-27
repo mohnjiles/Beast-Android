@@ -15,7 +15,6 @@ import xyz.jtmiles.beastforgw2.adapters.CharacterInfoAdapter
 import xyz.jtmiles.beastforgw2.models.Character
 import xyz.jtmiles.beastforgw2.util.Utils
 import xyz.jtmiles.beastforgw2.util.bindView
-import java.util.*
 
 class CharacterDetailFragment : Fragment() {
 
@@ -46,7 +45,7 @@ class CharacterDetailFragment : Fragment() {
 
 
         tvCharacterName.text = mCharacter?.name
-        tvCharacterRaceClass.text = String.format(Locale.getDefault(), "%d %s %s", mCharacter?.level, mCharacter?.race, mCharacter?.profession)
+        tvCharacterRaceClass.text = "${mCharacter?.level} ${mCharacter?.race} ${mCharacter?.profession}"
         ivClassIcon.setImageResource(Utils.getResourceIdByName(activity, mCharacter?.profession!!))
 
         rvStats.addItemDecoration(VerticalSpaceItemDecoration(32))
@@ -63,4 +62,4 @@ class CharacterDetailFragment : Fragment() {
             return fragment
         }
     }
-}// Required empty public constructor
+}

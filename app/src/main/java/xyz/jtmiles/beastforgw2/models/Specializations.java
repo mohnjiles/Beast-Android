@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Specializations implements Serializable {
 
-    private List<Pve> pve = new ArrayList<Pve>();
-    private List<Pvp> pvp = new ArrayList<Pvp>();
-    private List<Wvw> wvw = new ArrayList<Wvw>();
+    private List<Pve> pve = new ArrayList<>();
+    private List<Pvp> pvp = new ArrayList<>();
+    private List<Wvw> wvw = new ArrayList<>();
     private static final long serialVersionUID = 0L;
 
     /**
