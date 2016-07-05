@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.jetbrains.anko.async
+import org.jetbrains.anko.uiThread
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.activities.ItemDetailActivity
 import xyz.jtmiles.beastforgw2.adapters.InventoryAdapter
@@ -48,24 +50,30 @@ class InventoryFragment : Fragment() {
 
         val itemList = ArrayList<Inventory>()
 
-        for (bag in mCharacter!!.bags) {
-            if (bag == null) continue
-            for (inventory in bag.inventory) {
-                if (inventory != null)
-                    itemList.add(inventory)
+        async() {
+            for (bag in mCharacter!!.bags) {
+                if (bag == null) continue
+                for (inventory in bag.inventory) {
+                    if (inventory != null)
+                        itemList.add(inventory)
+                }
+            }
+
+            uiThread {
+                rvInventory.setHasFixedSize(true)
+
+                val gridLayoutManager = GridLayoutManager(activity, 4)
+                rvInventory.layoutManager = gridLayoutManager
+
+                val adapter = InventoryAdapter(activity, itemList)
+                rvInventory.adapter = adapter
+                rvInventory.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
+                    val intent = Intent(activity, ItemDetailActivity::class.java)
+                    intent.putExtra("item", itemList[pos])
+                    startActivity(intent)
+                }))
             }
         }
-
-        val gridLayoutManager = GridLayoutManager(activity, 4)
-        rvInventory.layoutManager = gridLayoutManager
-
-        val adapter = InventoryAdapter(activity, itemList)
-        rvInventory.adapter = adapter
-        rvInventory.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
-            val intent = Intent(activity, ItemDetailActivity::class.java)
-            intent.putExtra("item", itemList[pos])
-            startActivity(intent)
-        }));
 
     }
 
@@ -79,4 +87,4 @@ class InventoryFragment : Fragment() {
             return fragment
         }
     }
-}// Required empty public constructor
+}

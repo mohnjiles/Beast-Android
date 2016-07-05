@@ -32,7 +32,7 @@ object Utils {
     fun getResourceIdByName(context: Context, name: String): Int {
         val resources = context.resources
 
-        val drawableName = name.replace("[^A-Za-z]".toRegex(), "").toLowerCase()
+        val drawableName = name.replace("[^A-Za-z_]".toRegex(), "").toLowerCase()
 
         return resources.getIdentifier(drawableName, "drawable", context.packageName)
     }

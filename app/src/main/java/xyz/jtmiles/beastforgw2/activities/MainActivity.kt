@@ -18,6 +18,7 @@ import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.fragments.*
 import xyz.jtmiles.beastforgw2.models.Account
 import xyz.jtmiles.beastforgw2.services.AccountService
+import xyz.jtmiles.beastforgw2.util.Constants
 import xyz.jtmiles.beastforgw2.util.Utils
 import xyz.jtmiles.beastforgw2.util.bindView
 
@@ -56,6 +57,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 mCurrentFragmentTag = "CharactersFragment"
                 toolbar.subtitle = "Characters"
             }
+        } else if (Utils.getSharedPrefs(this).getString(Constants.PREF_API_KEY, "") == "") {
+            supportFragmentManager.beginTransaction().replace(R.id.container, SettingsFragment.newInstance(), "SettingsFragment").commit()
+            mCurrentFragmentTag = "SettingsFragment"
+            toolbar.subtitle = "Settings"
         } else {
             supportFragmentManager.beginTransaction().replace(R.id.container, CharactersFragment.newInstance(), "CharactersFragment").commit()
             mCurrentFragmentTag = "CharactersFragment"
@@ -128,6 +133,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             supportActionBar?.subtitle = "Settings"
             supportFragmentManager.beginTransaction().replace(R.id.container, SettingsFragment.newInstance(), "SettingsFragment").commit()
             mCurrentFragmentTag = "SettingsFragment"
+        } else if (id == R.id.nav_news) {
+            supportActionBar?.subtitle = "News"
+            supportFragmentManager.beginTransaction().replace(R.id.container, NewsFragment.newInstance(), "NewsFragment").commit()
+            mCurrentFragmentTag = "NewsFragment"
         }
 
         drawer.closeDrawer(GravityCompat.START)

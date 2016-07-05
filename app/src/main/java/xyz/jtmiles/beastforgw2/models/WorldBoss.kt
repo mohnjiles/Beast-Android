@@ -11,4 +11,5 @@ class WorldBoss {
     var end: DateTime? = null
     var eventName: String? = null
     var waypointLink: String? = null
+    var iconName: String? = null
 }

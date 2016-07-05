@@ -73,6 +73,7 @@ class InventoryAdapter(val mContext: Context, val mItemList: List<Inventory>) : 
                                 Glide.with(itemView.context).load(item.icon)
                                         .placeholder(R.drawable.empty_inventory)
                                         .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .dontAnimate()
                                         .into(itemView.ivItemIcon)
                             } catch (ex: IllegalArgumentException) {
                                 Log.w("InventoryAdapter", ex)

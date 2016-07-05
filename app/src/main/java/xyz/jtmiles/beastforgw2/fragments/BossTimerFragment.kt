@@ -87,6 +87,7 @@ class BossTimerFragment : Fragment() {
                 actualBoss.end = bossEndDateTime
                 actualBoss.eventName = boss.eventName
                 actualBoss.waypointLink = boss.waypointLink
+                actualBoss.iconName = boss.iconName
                 (mWorldBosses as ArrayList<WorldBoss>).add(actualBoss)
 
             }

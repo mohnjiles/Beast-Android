@@ -13,6 +13,7 @@ import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.PeriodFormatterBuilder
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.models.WorldBoss
+import xyz.jtmiles.beastforgw2.util.Utils
 
 class BossTimerAdapter(val mBossTimerList: List<WorldBoss?>) : RecyclerView.Adapter<BossTimerAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
@@ -30,35 +31,40 @@ class BossTimerAdapter(val mBossTimerList: List<WorldBoss?>) : RecyclerView.Adap
 
         fun bindBossTimer(boss: WorldBoss, pos: Int) {
             itemView.tvBossName.text = boss.eventName
-            val formatter = DateTimeFormat.forPattern("h:mm a")
-            //val t = PrettyTime()
-            //val timeFormatted = t.format(boss.start?.toDate())
-            //itemView.tvBossStart.text = timeFormatted
 
             val start = boss.start
             val end = DateTime()
             val p = Period(start, end)
             val periodFormatter = PeriodFormatterBuilder()
                 .appendHours()
-            .appendSuffix("h").appendSeparator(" ")
-            .appendMinutes().appendSuffix("m").toFormatter()
+                .appendSuffix("h").appendSeparator(" ")
+                .appendMinutes().appendSuffix("m").toFormatter()
 
             val timeString = p.toString(periodFormatter)
 
-            if (timeString.contains("-")) {
+            if (timeString.contains("-"))
                 itemView.tvBossStart.text = timeString.replace("-", "")
-            } else if (timeString.isNullOrBlank()) {
+            else if (timeString.isNullOrBlank())
                 itemView.tvBossStart.text = "Starting now!"
-            }
-            else {
+            else
                 itemView.tvBossStart.text = "Started $timeString ago"
-            }
+
+
+            val formatter = DateTimeFormat.forPattern("h:mm a")
             itemView.tvBossStartActual.text = formatter.print(boss.start?.withZone(DateTimeZone.getDefault()))
 
-            if (pos < 2)
+            if (p.hours == 0 && Math.abs(p.minutes) <= 15) {
                 itemView.tvBossName.setTextColor(Color.parseColor("#F5A320"))
-            else
+                itemView.tvBossStart.setTextColor(Color.parseColor("#F5A320"))
+            }
+            else {
                 itemView.tvBossName.setTextColor(Color.parseColor("#FFFFFF"))
+                itemView.tvBossStart.setTextColor(Color.parseColor("#FFFFFF"))
+            }
+
+
+            itemView.ivBossIcon.setImageResource(Utils.getResourceIdByName(itemView.context, boss.iconName!!))
+
         }
     }
 }

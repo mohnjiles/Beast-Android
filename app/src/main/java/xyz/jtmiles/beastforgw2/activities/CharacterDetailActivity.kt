@@ -36,7 +36,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         // Set up the ViewPager with the sections adapter.
         mViewPager.adapter = mSectionsPagerAdapter
-        mViewPager.offscreenPageLimit = 2;
+        mViewPager.offscreenPageLimit = 2
 
         val tabLayout = findViewById(R.id.tabs) as TabLayout?
         tabLayout!!.setupWithViewPager(mViewPager)
@@ -48,7 +48,6 @@ class CharacterDetailActivity : AppCompatActivity() {
             supportActionBar?.title = mCharacter.name
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
