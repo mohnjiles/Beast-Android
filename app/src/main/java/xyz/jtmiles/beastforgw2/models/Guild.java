@@ -1,6 +1,7 @@
 
 package xyz.jtmiles.beastforgw2.models;
 
+
 import com.google.gson.annotations.SerializedName;
 
 public class Guild {

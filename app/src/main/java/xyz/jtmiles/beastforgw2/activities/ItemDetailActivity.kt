@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import retrofit2.Call
@@ -31,6 +32,9 @@ class ItemDetailActivity : AppCompatActivity() {
     val tvDescription: TextView by bindView(R.id.tvDescription)
     val tvType: TextView by bindView(R.id.tvType)
 
+    val rlLoading: RelativeLayout by bindView(R.id.rlLoading)
+    val rlItemDetails: RelativeLayout by bindView(R.id.rlItemDetails)
+
     val toolbar: Toolbar by bindView(R.id.toolbar)
 
 
@@ -41,13 +45,17 @@ class ItemDetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val inventory = intent.extras.getSerializable("item") as Inventory
+        val inventory = intent.extras.getSerializable("item") as Inventory? ?: return
+
 
         val itemService = Utils.getRetrofit(true).create(ItemService::class.java);
         itemService.getItemById(inventory.id).enqueue(object : Callback<Item> {
             override fun onResponse(call: Call<Item>, response: Response<Item>) {
                 if (response.isSuccessful) {
                     val item = response.body()
+
+                    rlItemDetails.visibility = View.VISIBLE
+                    rlLoading.visibility = View.GONE
 
                     Glide.with(this@ItemDetailActivity).load(item.icon).into(ivItemIcon)
 
@@ -58,11 +66,11 @@ class ItemDetailActivity : AppCompatActivity() {
                                 "Crafting Material"
                             else if (item.type == "UpgradeComponent")
                                 "Upgrade Component"
-                            else if (item.type == "Weapon" || item.type == "Armor")
+                            else if (item.type == "Weapon" || item.type == "Armor" || item.type == "Trinket")
                                 item.details?.type
                             else item.type
                     tvRequiredLevel.text = if (item.level != null && item.level != 0) "Required Level: ${item.level}" else ""
-                    supportActionBar?.title = item.name
+                    supportActionBar?.subtitle = item.name
 
                     if (item.details?.minPower != null && item.details?.minPower != 0) {
                         tvWepOrDefenseTitle.text = "Weapon Strength:"
@@ -90,9 +98,20 @@ class ItemDetailActivity : AppCompatActivity() {
                     for (i in tvStatList.indices) {
                         val infix = item.details?.infixUpgrade
                         if (infix != null) {
-                            val attr = infix.attributes[i]
-                            if (attr != null) {
-                                tvStatList[i].text = "+${attr.modifier} ${attr.attribute}"
+                            try {
+                                val attr = infix.attributes[i]
+                                if (attr != null) {
+                                    when (attr.attribute){
+                                        "ConditionDamage" -> attr.attribute = "Condition Damage"
+                                        "ConditionDuration" -> attr.attribute = "Expertise"
+                                        "Healing" -> attr.attribute = "Healing Power"
+                                        "CritDamage" -> attr.attribute = "Ferocity"
+                                    }
+
+                                    tvStatList[i].text = "+${attr.modifier} ${attr.attribute}"
+                                }
+                            } catch (ex: IndexOutOfBoundsException) {
+                                tvStatList[i].visibility = View.GONE
                             }
                         } else {
                             tvStatList[i].visibility = View.GONE

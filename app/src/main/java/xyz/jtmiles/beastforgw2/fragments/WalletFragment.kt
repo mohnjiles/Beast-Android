@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,17 +24,13 @@ class WalletFragment : Fragment() {
 
 
     val rvWallet: RecyclerView by bindView(R.id.rvWallet)
+    val pbLoading: ProgressBar by bindView(R.id.pbLoading)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) = super.onCreate(savedInstanceState)
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val v = inflater!!.inflate(R.layout.fragment_wallet, container, false)
-        return v
-    }
+                              savedInstanceState: Bundle?): View? =
+            inflater!!.inflate(R.layout.fragment_wallet, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -46,9 +43,14 @@ class WalletFragment : Fragment() {
         accountService.getWallet(Utils.getApiKeyForAuth(activity)).enqueue(object : Callback<List<Wallet>> {
             override fun onResponse(call: Call<List<Wallet>>, response: Response<List<Wallet>>) {
                 if (response.isSuccessful) {
+
+                    rvWallet.visibility = View.VISIBLE
+                    pbLoading.visibility = View.GONE
+
                     val wallet = response.body()
                     val adapter = WalletAdapter(activity, wallet)
                     rvWallet.adapter = adapter
+
                 }
             }
 

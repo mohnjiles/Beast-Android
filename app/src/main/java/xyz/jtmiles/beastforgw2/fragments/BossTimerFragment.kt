@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.jetbrains.anko.async
@@ -30,6 +31,7 @@ class BossTimerFragment : Fragment() {
 
     var mWorldBosses: ArrayList<WorldBoss>? = null
     val rvBossTimers: RecyclerView by bindView(R.id.rvBossTimers)
+    val pbLoading: ProgressBar by bindView(R.id.pbLoading)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +97,8 @@ class BossTimerFragment : Fragment() {
             val sortedBosses = (mWorldBosses as ArrayList<WorldBoss>).sortedBy { x -> x.end }.groupBy { it.eventName }.map { it.value.firstOrNull() }
 
             uiThread {
+                pbLoading.visibility = View.GONE
+                rvBossTimers.visibility = View.VISIBLE
                 rvBossTimers.adapter = BossTimerAdapter(sortedBosses)
             }
         }

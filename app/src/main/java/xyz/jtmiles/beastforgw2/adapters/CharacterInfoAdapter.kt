@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import org.ocpsoft.prettytime.PrettyTime
+import org.joda.time.DateTime
+import org.joda.time.Period
+import org.joda.time.format.PeriodFormatterBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -75,17 +77,18 @@ class CharacterInfoAdapter(val mCharacter: Character) : RecyclerView.Adapter<Cha
                 holder.tvTitle.text = "Created"
                 holder.rlLayout.setBackgroundColor(Color.parseColor("#1b5e20"))
 
-                val t = PrettyTime()
-                val durations = t.calculatePreciseDuration(Utils.getCalendarFromISO(mCharacter.created!!).time)
-                try {
-                    durations.removeAt(durations.size - 1)
-                    durations.removeAt(durations.size - 2)
-                    durations.removeAt(durations.size - 3)
-                } catch (ex: ArrayIndexOutOfBoundsException) {
-                    Log.w("CharacterInfoAdapter", ex)
-                }
+                val start = DateTime(mCharacter.created!!)
+                val end = DateTime()
+                val p = Period(start, end)
 
-                holder.tvContent.text = String.format("%s", t.format(durations))
+                val periodFormatter = PeriodFormatterBuilder()
+                        .appendYears().appendSuffix("y").appendSeparator(" ")
+                        .appendMonths().appendSuffix("m").appendSeparator(" ")
+                        .appendWeeks().appendSuffix("w").appendSeparator(" ")
+                        .appendDays().appendSuffix("d").appendSeparator(" ")
+                        .toFormatter()
+
+                holder.tvContent.text = p.toString(periodFormatter) + " ago"
             }
         }
     }

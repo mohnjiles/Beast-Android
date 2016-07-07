@@ -1,17 +1,13 @@
 package xyz.jtmiles.beastforgw2.models
 
-import java.util.*
+import com.google.gson.annotations.SerializedName
 
-class Details {
-
-    val type: String? = null
-    var damageType: String? = null
-    var minPower: Int? = null
-    var maxPower: Int? = null
-    var defense: Int? = null
-    var infusionSlots: List<Any> = ArrayList()
-    var infixUpgrade: InfixUpgrade? = null
-    var suffixItemId: Int? = null
-    var secondarySuffixItemId: String? = null
-
-}
+data class Details(val type: String,
+                   val damageType: String,
+                   val minPower: Int,
+                   val maxPower: Int,
+                   val defense: Int,
+                   val infusionSlots: List<Any>,
+                   @SerializedName("infix_upgrade") val infixUpgrade: InfixUpgrade,
+                   val suffixItemId: Int,
+                   val secondarySuffixItemId: String)
