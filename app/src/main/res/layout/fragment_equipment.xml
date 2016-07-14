@@ -1,0 +1,193 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".fragments.InventoryFragment">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="xyz.jtmiles.beastforgw2.fragments.EquipmentFragment">
+
+
+        <ImageView
+            android:id="@+id/ivHelm"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/empty_inventory" />
+
+        <ImageView
+            android:id="@+id/ivShoulders"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:layout_alignLeft="@+id/ivHelm"
+            android:layout_alignStart="@+id/ivHelm"
+            android:layout_below="@+id/ivHelm"
+            android:src="@drawable/empty_inventory"
+            android:layout_marginTop="16dp" />
+
+        <ImageView
+            android:id="@+id/ivChest"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:layout_alignLeft="@+id/ivShoulders"
+            android:layout_alignStart="@+id/ivShoulders"
+            android:layout_below="@+id/ivShoulders"
+            android:src="@drawable/empty_inventory"
+            android:layout_marginTop="16dp" />
+
+        <ImageView
+            android:id="@+id/ivGloves"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:layout_alignLeft="@+id/ivChest"
+            android:layout_alignStart="@+id/ivChest"
+            android:layout_below="@+id/ivChest"
+            android:src="@drawable/empty_inventory"
+            android:layout_marginTop="16dp" />
+
+        <ImageView
+            android:id="@+id/ivPants"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:layout_alignLeft="@+id/ivGloves"
+            android:layout_alignStart="@+id/ivGloves"
+            android:layout_below="@+id/ivGloves"
+            android:src="@drawable/empty_inventory"
+            android:layout_marginTop="16dp" />
+        <ImageView
+            android:id="@+id/ivBoots"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:layout_alignLeft="@+id/ivPants"
+            android:layout_alignStart="@+id/ivPants"
+            android:layout_below="@+id/ivPants"
+            android:src="@drawable/empty_inventory"
+            android:layout_marginTop="16dp" />
+
+        <ImageView
+            android:id="@+id/ivWeapon1Slot1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:src="@drawable/empty_inventory"
+            android:layout_above="@+id/ivShoulders"
+            android:layout_toRightOf="@+id/ivHelm"
+            android:layout_toEndOf="@+id/ivHelm"
+            android:layout_marginLeft="24dp" />
+        <ImageView
+            android:id="@+id/ivWeapon1Slot2"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="2dp"
+            android:layout_alignLeft="@+id/ivWeapon1Slot1"
+            android:layout_alignStart="@+id/ivWeapon1Slot1"
+            android:layout_below="@+id/ivWeapon1Slot1"
+            android:src="@drawable/empty_inventory"
+            android:layout_marginStart="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="8dp" />
+
+        <ImageView
+            android:id="@+id/ivWeapon2Slot1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:layout_alignLeft="@+id/ivWeapon1Slot1"
+            android:layout_alignStart="@+id/ivWeapon1Slot1"
+            android:layout_below="@+id/ivWeapon1Slot2"
+            android:src="@drawable/empty_inventory"
+            android:layout_marginTop="24dp" />
+        <ImageView
+            android:id="@+id/ivWeapon2Slot2"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="2dp"
+            android:layout_alignLeft="@+id/ivWeapon2Slot1"
+            android:layout_alignStart="@+id/ivWeapon2Slot1"
+            android:layout_below="@+id/ivWeapon2Slot1"
+            android:src="@drawable/empty_inventory"
+            android:layout_marginStart="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <ImageView
+            android:id="@+id/ivAccessory2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:src="@drawable/empty_inventory"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp" />
+
+        <ImageView
+            android:id="@+id/ivAccessory1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:src="@drawable/empty_inventory"
+            android:layout_alignBottom="@+id/ivAccessory2"
+            android:layout_toLeftOf="@+id/ivAccessory2"
+            android:layout_toStartOf="@+id/ivAccessory2"
+            android:layout_marginRight="8dp" />
+
+        <ImageView
+            android:id="@+id/ivBackpack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:src="@drawable/empty_inventory"
+            android:layout_alignBottom="@+id/ivAccessory1"
+            android:layout_toLeftOf="@+id/ivAccessory1"
+            android:layout_toStartOf="@+id/ivAccessory1"
+            android:layout_marginRight="8dp" />
+
+        <ImageView
+            android:id="@+id/ivRing2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:src="@drawable/empty_inventory"
+            android:layout_below="@+id/ivAccessory2"
+            android:layout_alignRight="@+id/ivAccessory2"
+            android:layout_alignEnd="@+id/ivAccessory2"
+            android:layout_marginTop="8dp" />
+
+        <ImageView
+            android:id="@+id/ivRing1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:src="@drawable/empty_inventory"
+            android:layout_alignBottom="@+id/ivRing2"
+            android:layout_alignRight="@+id/ivAccessory1"
+            android:layout_alignEnd="@+id/ivAccessory1" />
+
+        <ImageView
+            android:id="@+id/ivAmulet"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="2dp"
+            android:src="@drawable/empty_inventory"
+            android:layout_alignBottom="@+id/ivRing1"
+            android:layout_alignRight="@+id/ivBackpack"
+            android:layout_alignEnd="@+id/ivBackpack" />
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

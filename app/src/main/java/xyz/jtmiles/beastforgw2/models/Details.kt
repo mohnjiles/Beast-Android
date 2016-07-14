@@ -1,6 +1,7 @@
 package xyz.jtmiles.beastforgw2.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Details(val type: String,
                    val damageType: String,
@@ -10,4 +11,8 @@ data class Details(val type: String,
                    val infusionSlots: List<Any>,
                    @SerializedName("infix_upgrade") val infixUpgrade: InfixUpgrade,
                    val suffixItemId: Int,
-                   val secondarySuffixItemId: String)
+                   val secondarySuffixItemId: String) : Serializable{
+    companion object {
+        private val serialVersionUID = 0L
+    }
+}

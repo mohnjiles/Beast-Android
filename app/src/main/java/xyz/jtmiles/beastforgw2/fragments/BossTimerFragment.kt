@@ -76,7 +76,7 @@ class BossTimerFragment : Fragment() {
             (mWorldBosses as ArrayList<WorldBoss>).clear()
             val worldBossesJsoned: List<WorldBossJson> = mapper.readValue(json)
 
-            for(boss in worldBossesJsoned) {
+            for (boss in worldBossesJsoned) {
                 var bossEndDateTime = DateTime(DateTimeZone.UTC).withTime(boss.end.split(':')[0].toInt(), boss.end.split(':')[1].toInt(), 0, 0)
                 var bossStartDateTime = DateTime(DateTimeZone.UTC).withTime(boss.start.split(':')[0].toInt(), boss.start.split(':')[1].toInt(), 0, 0)
 

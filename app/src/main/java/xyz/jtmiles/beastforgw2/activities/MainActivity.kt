@@ -68,14 +68,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         val navViewHeader: View = navigationView.getHeaderView(0)
-        val tvAccountName: TextView = navViewHeader.findViewById(R.id.tvAccountName) as TextView
+        val tvAccountName: TextView? = navViewHeader.findViewById(R.id.tvAccountName) as TextView?
 
         val accountService = Utils.getRetrofit(true).create(AccountService::class.java)
         accountService.getAccount(Utils.getApiKeyForAuth(this)).enqueue(object : Callback<Account> {
             override fun onResponse(call: Call<Account>, response: Response<Account>) {
                 if (response.isSuccessful) {
                     val account = response.body()
-                    tvAccountName.text = "${account.name}"
+                    tvAccountName?.text = "${account.name}"
                 }
             }
 

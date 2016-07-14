@@ -26,7 +26,7 @@ object Utils {
     }
 
     fun getApiKeyForAuth(context: Context): String {
-        return "Bearer " + Utils.getSharedPrefs(context).getString(Constants.PREF_API_KEY, "")!!
+        return "Bearer " + getSharedPrefs(context).getString(Constants.PREF_API_KEY, "")!!
     }
 
     fun getResourceIdByName(context: Context, name: String): Int {

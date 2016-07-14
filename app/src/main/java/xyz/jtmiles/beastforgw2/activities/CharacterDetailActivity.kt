@@ -12,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.fragments.CharacterDetailFragment
+import xyz.jtmiles.beastforgw2.fragments.EquipmentFragment
 import xyz.jtmiles.beastforgw2.fragments.InventoryFragment
 import xyz.jtmiles.beastforgw2.fragments.SettingsFragment
 import xyz.jtmiles.beastforgw2.models.Character
@@ -82,6 +83,7 @@ class CharacterDetailActivity : AppCompatActivity() {
             when (position) {
                 0 -> return CharacterDetailFragment.newInstance(mCharacter)
                 1 -> return InventoryFragment.newInstance(mCharacter)
+                2 -> return EquipmentFragment.newInstance(mCharacter)
             }
 
             return SettingsFragment.newInstance()
@@ -96,7 +98,7 @@ class CharacterDetailActivity : AppCompatActivity() {
             when (position) {
                 0 -> return "Details"
                 1 -> return "Inventory"
-                2 -> return "SECTION 3"
+                2 -> return "Equipment"
             }
             return null
         }

@@ -14,6 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import xyz.jtmiles.beastforgw2.R
+import xyz.jtmiles.beastforgw2.models.Attribute
 import xyz.jtmiles.beastforgw2.models.Inventory
 import xyz.jtmiles.beastforgw2.models.Item
 import xyz.jtmiles.beastforgw2.services.ItemService
@@ -99,7 +100,7 @@ class ItemDetailActivity : AppCompatActivity() {
                         val infix = item.details?.infixUpgrade
                         if (infix != null) {
                             try {
-                                val attr = infix.attributes[i]
+                                val attr: Attribute? = infix.attributes[i]
                                 if (attr != null) {
                                     when (attr.attribute){
                                         "ConditionDamage" -> attr.attribute = "Condition Damage"

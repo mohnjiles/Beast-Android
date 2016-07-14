@@ -1,8 +1,9 @@
 package xyz.jtmiles.beastforgw2.models
 
+import java.io.Serializable
 import java.util.*
 
-class Item {
+class Item : Serializable {
 
     var name: String? = null
     var description: String? = null
@@ -18,5 +19,9 @@ class Item {
     var chatLink: String? = null
     var icon: String? = null
     var details: Details? = null
+
+    companion object {
+        private val serialVersionUID = 0L
+    }
 
 }
