@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import xyz.jtmiles.beastforgw2.activities.ItemDetailActivity
 import xyz.jtmiles.beastforgw2.models.Character
 import xyz.jtmiles.beastforgw2.models.Inventory
 import xyz.jtmiles.beastforgw2.models.Item
+import xyz.jtmiles.beastforgw2.models.Skin
 import xyz.jtmiles.beastforgw2.services.ItemService
 import xyz.jtmiles.beastforgw2.util.Utils
 
@@ -44,26 +46,34 @@ class EquipmentFragment : Fragment() {
 
         for (equipment in mCharacter!!.equipment) {
             async() {
-                val response: Response<Item> = itemService.getItemById(equipment.id!!).execute()
+                val itemResponse: Response<Item> = itemService.getItemById(equipment.id!!).execute()
+                var skinResponse: Response<Skin>? = null
+                try {
+                    skinResponse = itemService.getSkinById(equipment.skin).execute()
+                } catch (ex: Exception){
+                    Log.d("EquipmentFragment", "No skin found")
+                }
+
                 uiThread {
-                    val item = response.body()
+                    val item = itemResponse.body()
+                    val skin = skinResponse?.body()
                     when (equipment.slot) {
-                        "Backpack" -> loadItem(item, ivBackpack)
-                        "Coat" -> loadItem(item, ivChest)
-                        "Boots" -> loadItem(item, ivBoots)
-                        "Gloves" -> loadItem(item, ivGloves)
-                        "Helm" -> loadItem(item, ivHelm)
-                        "Leggings" -> loadItem(item, ivPants)
-                        "Shoulders" -> loadItem(item, ivShoulders)
-                        "Accessory1" -> loadItem(item, ivAccessory1)
-                        "Accessory2" -> loadItem(item, ivAccessory2)
-                        "Ring1" -> loadItem(item, ivRing1)
-                        "Ring2" -> loadItem(item, ivRing2)
-                        "Amulet" -> loadItem(item, ivAmulet)
-                        "WeaponA1" -> loadItem(item, ivWeapon1Slot1)
-                        "WeaponA2" -> loadItem(item, ivWeapon1Slot2)
-                        "WeaponB1" -> loadItem(item, ivWeapon2Slot1)
-                        "WeaponB2" -> loadItem(item, ivWeapon2Slot2)
+                        "Backpack" -> loadItem(item, skin, ivBackpack)
+                        "Coat" -> loadItem(item, skin, ivChest)
+                        "Boots" -> loadItem(item, skin, ivBoots)
+                        "Gloves" -> loadItem(item, skin, ivGloves)
+                        "Helm" -> loadItem(item, skin, ivHelm)
+                        "Leggings" -> loadItem(item, skin, ivPants)
+                        "Shoulders" -> loadItem(item, skin, ivShoulders)
+                        "Accessory1" -> loadItem(item, skin, ivAccessory1)
+                        "Accessory2" -> loadItem(item, skin, ivAccessory2)
+                        "Ring1" -> loadItem(item, skin, ivRing1)
+                        "Ring2" -> loadItem(item, skin, ivRing2)
+                        "Amulet" -> loadItem(item, skin, ivAmulet)
+                        "WeaponA1" -> loadItem(item, skin, ivWeapon1Slot1)
+                        "WeaponA2" -> loadItem(item, skin, ivWeapon1Slot2)
+                        "WeaponB1" -> loadItem(item, skin, ivWeapon2Slot1)
+                        "WeaponB2" -> loadItem(item, skin, ivWeapon2Slot2)
                     }
 
                 }
@@ -72,7 +82,9 @@ class EquipmentFragment : Fragment() {
 
     }
 
-    private fun loadItem(item: Item?, imageView: ImageView) {
+    private fun loadItem(item: Item?, skin: Skin?, imageView: ImageView?) {
+
+        if(imageView == null) return
 
         if (item == null) {
             imageView.setImageResource(R.drawable.empty_inventory)
@@ -91,7 +103,9 @@ class EquipmentFragment : Fragment() {
             else -> imageView.setBackgroundColor(Color.parseColor("#ffffff"))
         }
 
-        Glide.with(this).load(item.icon)
+        val icon = if (skin?.icon.isNullOrEmpty()) item.icon else skin?.icon
+
+        Glide.with(this).load(icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.empty_inventory)
                 .into(imageView)

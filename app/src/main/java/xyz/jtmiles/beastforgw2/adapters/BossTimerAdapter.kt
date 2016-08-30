@@ -17,9 +17,9 @@ import xyz.jtmiles.beastforgw2.util.Utils
 
 class BossTimerAdapter(val mBossTimerList: List<WorldBoss?>) : RecyclerView.Adapter<BossTimerAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val bossTimer = mBossTimerList[position];
+        val bossTimer = mBossTimerList[position]
         if (bossTimer != null)
-            holder?.bindBossTimer(bossTimer, position)
+            holder?.bindBossTimer(bossTimer)
     }
 
     override fun getItemCount(): Int = mBossTimerList.size
@@ -29,7 +29,7 @@ class BossTimerAdapter(val mBossTimerList: List<WorldBoss?>) : RecyclerView.Adap
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindBossTimer(boss: WorldBoss, pos: Int) {
+        fun bindBossTimer(boss: WorldBoss) {
             itemView.tvBossName.text = boss.eventName
 
             val start = boss.start

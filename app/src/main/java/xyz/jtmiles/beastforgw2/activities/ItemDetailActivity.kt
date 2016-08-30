@@ -3,6 +3,7 @@ package xyz.jtmiles.beastforgw2.activities
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.CardView
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
@@ -34,10 +35,9 @@ class ItemDetailActivity : AppCompatActivity() {
     val tvType: TextView by bindView(R.id.tvType)
 
     val rlLoading: RelativeLayout by bindView(R.id.rlLoading)
-    val rlItemDetails: RelativeLayout by bindView(R.id.rlItemDetails)
+    val rlItemDetails: CardView by bindView(R.id.rlItemDetails)
 
     val toolbar: Toolbar by bindView(R.id.toolbar)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,6 +107,7 @@ class ItemDetailActivity : AppCompatActivity() {
                                         "ConditionDuration" -> attr.attribute = "Expertise"
                                         "Healing" -> attr.attribute = "Healing Power"
                                         "CritDamage" -> attr.attribute = "Ferocity"
+                                        "AgonyResistance" -> attr.attribute = "Agony Resistance"
                                     }
 
                                     tvStatList[i].text = "+${attr.modifier} ${attr.attribute}"
@@ -128,6 +129,12 @@ class ItemDetailActivity : AppCompatActivity() {
         })
 
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Glide.get(this).clearMemory()
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {

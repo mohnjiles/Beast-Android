@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/ivHelm"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -25,8 +25,8 @@
 
         <ImageView
             android:id="@+id/ivShoulders"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:layout_alignLeft="@+id/ivHelm"
             android:layout_alignStart="@+id/ivHelm"
@@ -36,8 +36,8 @@
 
         <ImageView
             android:id="@+id/ivChest"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:layout_alignLeft="@+id/ivShoulders"
             android:layout_alignStart="@+id/ivShoulders"
@@ -47,8 +47,8 @@
 
         <ImageView
             android:id="@+id/ivGloves"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:layout_alignLeft="@+id/ivChest"
             android:layout_alignStart="@+id/ivChest"
@@ -58,8 +58,8 @@
 
         <ImageView
             android:id="@+id/ivPants"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:layout_alignLeft="@+id/ivGloves"
             android:layout_alignStart="@+id/ivGloves"
@@ -68,8 +68,8 @@
             android:layout_marginTop="16dp" />
         <ImageView
             android:id="@+id/ivBoots"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:layout_alignLeft="@+id/ivPants"
             android:layout_alignStart="@+id/ivPants"
@@ -79,18 +79,18 @@
 
         <ImageView
             android:id="@+id/ivWeapon1Slot1"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:src="@drawable/empty_inventory"
-            android:layout_above="@+id/ivShoulders"
-            android:layout_toRightOf="@+id/ivHelm"
-            android:layout_toEndOf="@+id/ivHelm"
-            android:layout_marginLeft="24dp" />
+            android:layout_above="@+id/ivGloves"
+            android:layout_toRightOf="@+id/ivChest"
+            android:layout_toEndOf="@+id/ivChest"
+            android:layout_marginLeft="32dp" />
         <ImageView
             android:id="@+id/ivWeapon1Slot2"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:padding="2dp"
             android:layout_alignLeft="@+id/ivWeapon1Slot1"
             android:layout_alignStart="@+id/ivWeapon1Slot1"
@@ -98,12 +98,12 @@
             android:src="@drawable/empty_inventory"
             android:layout_marginStart="6dp"
             android:layout_marginLeft="6dp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="16dp" />
 
         <ImageView
             android:id="@+id/ivWeapon2Slot1"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:layout_alignLeft="@+id/ivWeapon1Slot1"
             android:layout_alignStart="@+id/ivWeapon1Slot1"
@@ -112,8 +112,8 @@
             android:layout_marginTop="24dp" />
         <ImageView
             android:id="@+id/ivWeapon2Slot2"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:padding="2dp"
             android:layout_alignLeft="@+id/ivWeapon2Slot1"
             android:layout_alignStart="@+id/ivWeapon2Slot1"
@@ -121,13 +121,13 @@
             android:src="@drawable/empty_inventory"
             android:layout_marginStart="6dp"
             android:layout_marginLeft="6dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp" />
 
         <ImageView
             android:id="@+id/ivAccessory2"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:src="@drawable/empty_inventory"
             android:layout_alignParentTop="true"
@@ -138,8 +138,8 @@
 
         <ImageView
             android:id="@+id/ivAccessory1"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:src="@drawable/empty_inventory"
             android:layout_alignBottom="@+id/ivAccessory2"
@@ -149,8 +149,8 @@
 
         <ImageView
             android:id="@+id/ivBackpack"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:src="@drawable/empty_inventory"
             android:layout_alignBottom="@+id/ivAccessory1"
@@ -160,8 +160,8 @@
 
         <ImageView
             android:id="@+id/ivRing2"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:src="@drawable/empty_inventory"
             android:layout_below="@+id/ivAccessory2"
@@ -171,8 +171,8 @@
 
         <ImageView
             android:id="@+id/ivRing1"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:src="@drawable/empty_inventory"
             android:layout_alignBottom="@+id/ivRing2"
@@ -181,8 +181,8 @@
 
         <ImageView
             android:id="@+id/ivAmulet"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="2dp"
             android:src="@drawable/empty_inventory"
             android:layout_alignBottom="@+id/ivRing1"

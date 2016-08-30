@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,12 @@ import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.activities.CharacterDetailActivity
 import xyz.jtmiles.beastforgw2.adapters.CharactersAdapter
 import xyz.jtmiles.beastforgw2.managers.CharactersManager
+import xyz.jtmiles.beastforgw2.managers.StorageManager
 import xyz.jtmiles.beastforgw2.models.Character
+import xyz.jtmiles.beastforgw2.models.SavedCharacterList
 import xyz.jtmiles.beastforgw2.util.RecyclerItemClickListener
 import xyz.jtmiles.beastforgw2.util.bindView
+import java.util.*
 
 
 /**
@@ -51,38 +55,64 @@ class CharactersFragment : Fragment() {
         val actionBar = (activity as AppCompatActivity).supportActionBar
         actionBar?.subtitle = "Characters"
 
+        val storageManager = StorageManager(activity)
         val layoutManager = LinearLayoutManager(activity)
         rvCharacters.layoutManager = layoutManager
-        //rvCharacters.addItemDecoration(new VerticalSpaceItemDecoration(48));
 
-        val charactersManager = CharactersManager(activity)
+        var savedCharacterList: SavedCharacterList? = null
+        try {
+            savedCharacterList = storageManager.loadCharacters()
+        } catch (ex: Exception){
+            Log.d("CharactersFragment", ex.message)
+        }
 
-        charactersManager.getAllCharacters(object : Callback<List<Character>> {
-            override fun onResponse(call: Call<List<Character>>, response: Response<List<Character>>) {
-                if (response.isSuccessful && activity != null) {
+        if (savedCharacterList != null && savedCharacterList.characterList.size > 0
+                && (Date().time - savedCharacterList.lastUpdated.time) < 15*60*1000) {
 
-                    pbLoading.visibility = View.GONE
-                    rvCharacters.visibility = View.VISIBLE
+            Log.d("CharactersFragment", "Loading from savedCharactersList")
 
-                    val adapter = CharactersAdapter(activity, response.body())
+            pbLoading.visibility = View.GONE
+            rvCharacters.visibility = View.VISIBLE
 
-                    rvCharacters.adapter = adapter
-                    rvCharacters.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view: View, position: Int ->
+            val adapter = CharactersAdapter(activity, savedCharacterList.characterList)
 
-                        val intent = Intent(activity, CharacterDetailActivity::class.java)
-                        intent.putExtra("character", response.body()[position])
-                        startActivity(intent)
-                    }))
+            rvCharacters.adapter = adapter
+            rvCharacters.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view: View, position: Int ->
+                val intent = Intent(activity, CharacterDetailActivity::class.java)
+                intent.putExtra("character", savedCharacterList!!.characterList[position])
+                startActivity(intent)
+            }))
+        } else {
+            Log.d("CharactersFragment", "Loading from web")
+
+
+            CharactersManager(activity).getAllCharacters(object : Callback<List<Character>> {
+                override fun onResponse(call: Call<List<Character>>, response: Response<List<Character>>) {
+                    if (response.isSuccessful && activity != null) {
+
+                        pbLoading.visibility = View.GONE
+                        rvCharacters.visibility = View.VISIBLE
+
+                        val adapter = CharactersAdapter(activity, response.body())
+
+                        storageManager.saveCharacters(response.body())
+
+                        rvCharacters.adapter = adapter
+                        rvCharacters.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view: View, position: Int ->
+
+                            val intent = Intent(activity, CharacterDetailActivity::class.java)
+                            intent.putExtra("character", response.body()[position])
+                            startActivity(intent)
+                        }))
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<List<Character>>, t: Throwable) {
+                override fun onFailure(call: Call<List<Character>>, t: Throwable) {
 
-            }
-        })
-
-
+                }
+            })        }
     }
+
 
     companion object {
 

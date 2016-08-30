@@ -67,6 +67,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             toolbar.subtitle = "Characters"
         }
 
+        setAccountName()
+
+        navigationView.setNavigationItemSelectedListener(this)
+    }
+
+    fun setAccountName() {
         val navViewHeader: View = navigationView.getHeaderView(0)
         val tvAccountName: TextView? = navViewHeader.findViewById(R.id.tvAccountName) as TextView?
 
@@ -83,8 +89,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
         })
-
-        navigationView.setNavigationItemSelectedListener(this)
     }
 
     override fun onBackPressed() {

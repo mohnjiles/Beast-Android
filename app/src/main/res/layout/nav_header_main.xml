@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:id="@+id/tvAccountName"
-        android:text="mohnjiles"
+        android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 

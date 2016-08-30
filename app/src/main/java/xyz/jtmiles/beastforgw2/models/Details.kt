@@ -5,8 +5,8 @@ import java.io.Serializable
 
 data class Details(val type: String,
                    val damageType: String,
-                   val minPower: Int,
-                   val maxPower: Int,
+                   @SerializedName("min_power") val minPower: Int,
+                   @SerializedName("max_power") val maxPower: Int,
                    val defense: Int,
                    val infusionSlots: List<Any>,
                    @SerializedName("infix_upgrade") val infixUpgrade: InfixUpgrade,

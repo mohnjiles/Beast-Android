@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import xyz.jtmiles.beastforgw2.R
+import xyz.jtmiles.beastforgw2.activities.MainActivity
 import xyz.jtmiles.beastforgw2.util.Constants
 import xyz.jtmiles.beastforgw2.util.Utils
 import xyz.jtmiles.beastforgw2.util.bindView
@@ -46,6 +47,7 @@ class SettingsFragment : Fragment() {
         btnSaveApiKey.setOnClickListener {
             Utils.getSharedPrefs(activity).edit().putString(Constants.PREF_API_KEY, etApiKey.text.toString()).commit()
             Snackbar.make(tvApiKeyHelp, "API Key saved successfully.", Snackbar.LENGTH_LONG).show()
+            (activity as MainActivity).setAccountName()
         }
     }
 

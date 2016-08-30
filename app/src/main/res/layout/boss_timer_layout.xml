@@ -8,66 +8,126 @@
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true">
 
-
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tvBossName"
+        <LinearLayout
+            android:id="@+id/rowBG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="false"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_toEndOf="@+id/ivBossIcon"
-            android:layout_toLeftOf="@+id/tvBossStart"
-            android:layout_toRightOf="@+id/ivBossIcon"
-            android:layout_toStartOf="@+id/tvBossStart"
-            android:text="Dragon&apos;s Stand: Assault"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tvBossStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:text="3m"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tvBossStartActual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/tvBossStart"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:text="9:30 PM"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#979797"
-            android:textSize="14sp" />
+            android:orientation="horizontal"
+            android:paddingBottom="-16dp"
+            android:gravity="end">
 
-        <ImageView
-            android:id="@+id/ivBossIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp" />
+            <RelativeLayout
+                android:id="@+id/rlAdd"
+                android:layout_width="@dimen/swipeWidth"
+                android:layout_height="match_parent"
+                android:background="@color/swipeoption_blue"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?android:selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_timer_white_48dp_2x"
+                        android:tint="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Set Reminder"
+                        android:textColor="@android:color/white"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/rlForeground"
+            android:layout_width="match_parent"
+            android:focusable="true"
+            android:background="#444444"
+            android:paddingBottom="4dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvBossName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="false"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/ivBossIcon"
+                android:layout_toLeftOf="@+id/tvBossStart"
+                android:layout_toRightOf="@+id/ivBossIcon"
+                android:layout_toStartOf="@+id/tvBossStart"
+                android:text="Dragon&apos;s Stand: Assault"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvBossStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="3m"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvBossStartActual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tvBossStart"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:text="9:30 PM"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#979797"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/ivBossIcon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp" />
+        </RelativeLayout>
     </RelativeLayout>
+
+
 </android.support.v7.widget.CardView>
