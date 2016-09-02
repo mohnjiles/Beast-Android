@@ -16,4 +16,9 @@
         \n\nNote: In order for the app to function fully, you will need to allow all permissions for your API key.</string>
     <string name="title_activity_character_detail">CharacterDetailActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="timer_help">
+        Please choose how long before {{boss_name}} you would like your reminder.
+    </string>
+
 </resources>

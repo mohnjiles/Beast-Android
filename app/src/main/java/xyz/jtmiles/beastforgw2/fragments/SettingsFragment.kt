@@ -57,4 +57,4 @@ class SettingsFragment : Fragment() {
             return SettingsFragment()
         }
     }
-}// Required empty public constructor
+}

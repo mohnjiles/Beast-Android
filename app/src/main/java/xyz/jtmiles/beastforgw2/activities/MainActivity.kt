@@ -61,6 +61,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             supportFragmentManager.beginTransaction().replace(R.id.container, SettingsFragment.newInstance(), "SettingsFragment").commit()
             mCurrentFragmentTag = "SettingsFragment"
             toolbar.subtitle = "Settings"
+        } else if (intent.getBooleanExtra("DoBossFragment", false)) {
+            supportFragmentManager.beginTransaction().replace(R.id.container, BossTimerFragment.newInstance(), "BossTimerFragment").commit()
+            mCurrentFragmentTag = "BossTimerFragment"
+            toolbar.subtitle = "Boss Timers"
         } else {
             supportFragmentManager.beginTransaction().replace(R.id.container, CharactersFragment.newInstance(), "CharactersFragment").commit()
             mCurrentFragmentTag = "CharactersFragment"

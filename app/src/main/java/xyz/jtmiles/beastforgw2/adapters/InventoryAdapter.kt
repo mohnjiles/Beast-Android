@@ -30,7 +30,7 @@ class InventoryAdapter(val mContext: Context, val mItemList: List<Inventory>) : 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(mContext).inflate(R.layout.inventory_item_layout, parent, false)
-        return ViewHolder(v, mContext)
+        return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -43,19 +43,18 @@ class InventoryAdapter(val mContext: Context, val mItemList: List<Inventory>) : 
 
     override fun onViewRecycled(holder: ViewHolder?) {
         super.onViewRecycled(holder)
-        Glide.clear(holder?.itemView?.ivItemIcon)
+        holder?.itemView?.ivItemIcon?.setImageResource(R.drawable.empty_inventory)
     }
 
-    class ViewHolder(itemView: View, val mContext: Context) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindInventory(inventory: Inventory?, itemService: ItemService?) {
 
-            Glide.clear(itemView.ivItemIcon)
 
             if (inventory == null) {
                 itemView.tvCount.text = ""
-                Glide.clear(itemView.ivItemIcon)
                 itemView.ivItemIcon.setBackgroundColor(Color.parseColor("#00000000"))
+                itemView.ivItemIcon.setImageResource(R.drawable.empty_inventory)
                 return
             }
 
@@ -67,30 +66,30 @@ class InventoryAdapter(val mContext: Context, val mItemList: List<Inventory>) : 
 
             if (inventory.id == null) {
                 itemView.tvCount.text = ""
-                Glide.clear(itemView.ivItemIcon)
                 itemView.ivItemIcon.setBackgroundColor(Color.parseColor("#00000000"))
+                itemView.ivItemIcon.setImageResource(R.drawable.empty_inventory)
                 return
             }
             itemService?.getItemById(inventory.id!!)!!.enqueue(object : Callback<Item> {
                 override fun onResponse(call: Call<Item>, response: Response<Item>) {
                     if (response.isSuccessful) {
-                        val item = response.body()
+                        val theItem = response.body()
 
                         try {
-                            if (item.icon.isNullOrEmpty()) {
-                                Glide.clear(itemView.ivItemIcon)
+                            if (theItem.icon.isNullOrEmpty()) {
+                                itemView.ivItemIcon.setImageResource(R.drawable.empty_inventory)
                             } else {
-                                Glide.with(mContext).load(item.icon)
+                                Glide.with(itemView.context).load(theItem.icon)
                                         .placeholder(R.drawable.empty_inventory)
-                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                                         .into(itemView.ivItemIcon)
                             }
                         } catch (ex: IllegalArgumentException) {
                             Log.w("InventoryAdapter", ex)
-                            Glide.clear(itemView.ivItemIcon)
+                            itemView.ivItemIcon.setImageResource(R.drawable.empty_inventory)
                         }
 
-                        when (item.rarity) {
+                        when (theItem.rarity) {
                             "Junk" -> itemView.ivItemIcon.setBackgroundColor(Color.parseColor("#a0a1a1"))
                             "Basic" -> itemView.ivItemIcon.setBackgroundColor(Color.parseColor("#ffffff"))
                             "Fine" -> itemView.ivItemIcon.setBackgroundColor(Color.parseColor("#5191f1"))
@@ -102,13 +101,13 @@ class InventoryAdapter(val mContext: Context, val mItemList: List<Inventory>) : 
                             else -> itemView.ivItemIcon.setBackgroundColor(Color.parseColor("#ffffff"))
                         }
                     } else {
-                        Glide.clear(itemView.ivItemIcon)
+                        itemView.ivItemIcon.setImageResource(R.drawable.empty_inventory)
                     }
                 }
 
                 override fun onFailure(call: Call<Item>?, t: Throwable?) {
                     Log.w("InventoryAdapter", "getItemById failed: $t\n${t?.message}")
-                    Glide.clear(itemView.ivItemIcon)
+                    itemView.ivItemIcon.setImageResource(R.drawable.empty_inventory)
                 }
 
             })

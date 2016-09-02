@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="16dp">
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/tvBossName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15 minutes"
+            android:id="@+id/rb15min"
+            android:layout_below="@+id/tvBossName"
+            android:layout_alignLeft="@+id/tvBossName"
+            android:layout_alignStart="@+id/tvBossName"
+            android:fontFamily="sans-serif-light" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 minutes"
+            android:id="@+id/rb10min"
+            android:layout_below="@+id/rb15min"
+            android:layout_alignLeft="@+id/rb15min"
+            android:layout_alignStart="@+id/rb15min"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-light" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 minutes"
+            android:id="@+id/rb5min"
+            android:layout_below="@+id/rb10min"
+            android:layout_alignLeft="@+id/rb10min"
+            android:layout_alignStart="@+id/rb10min"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-light" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 minute"
+            android:id="@+id/rb1min"
+            android:layout_below="@+id/rb5min"
+            android:layout_alignLeft="@+id/rb5min"
+            android:layout_alignStart="@+id/rb5min"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-light" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Custom"
+            android:id="@+id/rbCustom"
+            android:layout_below="@+id/rb1min"
+            android:layout_alignLeft="@+id/rb1min"
+            android:layout_alignStart="@+id/rb1min"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-light" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/timer_help"
+        android:id="@+id/tvBossName"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="sans-serif-light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="minutes"
+        android:id="@+id/textView"
+        android:layout_alignBottom="@+id/etCustomTime"
+        android:layout_toRightOf="@+id/etCustomTime"
+        android:layout_toEndOf="@+id/etCustomTime"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignTop="@+id/etCustomTime"
+        android:gravity="center_vertical"
+        android:fontFamily="sans-serif-light" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="4"
+        android:id="@+id/etCustomTime"
+        android:fontFamily="sans-serif-light"
+        android:layout_alignBottom="@+id/radioGroup"
+        android:layout_toRightOf="@+id/radioGroup"
+        android:layout_toEndOf="@+id/radioGroup" />
+
+</RelativeLayout>
