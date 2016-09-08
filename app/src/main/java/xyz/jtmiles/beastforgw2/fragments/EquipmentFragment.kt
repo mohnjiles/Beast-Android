@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,6 @@ import retrofit2.Response
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.activities.ItemDetailActivity
 import xyz.jtmiles.beastforgw2.models.Character
-import xyz.jtmiles.beastforgw2.models.Inventory
 import xyz.jtmiles.beastforgw2.models.Item
 import xyz.jtmiles.beastforgw2.models.Skin
 import xyz.jtmiles.beastforgw2.services.ItemService
@@ -51,7 +49,7 @@ class EquipmentFragment : Fragment() {
                 try {
                     skinResponse = itemService.getSkinById(equipment.skin).execute()
                 } catch (ex: Exception){
-                    Log.d("EquipmentFragment", "No skin found")
+                    // ignored
                 }
 
                 uiThread {
@@ -112,10 +110,7 @@ class EquipmentFragment : Fragment() {
 
         imageView.setOnClickListener {
             val intent = Intent(activity, ItemDetailActivity::class.java)
-            val inventory = Inventory()
-            inventory.id = item.id
-            inventory.count = 1
-            intent.putExtra("item", inventory)
+            intent.putExtra("item", item)
             startActivity(intent)
         }
     }

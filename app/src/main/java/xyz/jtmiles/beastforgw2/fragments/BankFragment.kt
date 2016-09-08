@@ -21,8 +21,11 @@ import xyz.jtmiles.beastforgw2.activities.ItemDetailActivity
 import xyz.jtmiles.beastforgw2.adapters.InventoryAdapter
 import xyz.jtmiles.beastforgw2.managers.StorageManager
 import xyz.jtmiles.beastforgw2.models.CachedBankItems
+import xyz.jtmiles.beastforgw2.models.CachedInventory
 import xyz.jtmiles.beastforgw2.models.Inventory
+import xyz.jtmiles.beastforgw2.models.Item
 import xyz.jtmiles.beastforgw2.services.AccountService
+import xyz.jtmiles.beastforgw2.services.ItemService
 import xyz.jtmiles.beastforgw2.util.RecyclerItemClickListener
 import xyz.jtmiles.beastforgw2.util.Utils
 import xyz.jtmiles.beastforgw2.util.bindView
@@ -56,59 +59,114 @@ class BankFragment : Fragment() {
         val itemDecoration = ItemOffsetDecoration(activity, R.dimen.grid_padding)
         rvBank.addItemDecoration(itemDecoration)
 
-        var cachedBank: CachedBankItems? = null
+        var cachedBank: CachedInventory? = null
         try {
             cachedBank = storageManager.loadBank()
         } catch (ex: Exception) {
             Log.w("BankFragment", "Error loading bank")
         }
 
-        if (cachedBank != null && cachedBank.bankItems.size > 0
-                && (Date().time - cachedBank.lastUpdated.time) < 15*60*1000) {
+        var cachedBankItems: CachedBankItems? = null
+        try {
+            cachedBankItems = storageManager.loadBankItems()
+        } catch (ex: Exception) {
+            Log.w("BankFragment", "Error loading bank")
+        }
+
+        if (cachedBank != null && cachedBankItems != null && cachedBankItems.bankItems.size > 0
+                && (Date().time - cachedBank.lastUpdated.time) <  5 * 60 * 1000) {
 
             Log.d("BankFragment", "Loading from cache")
+
+            val bankList = cachedBank.inventory
+
+            val sb = StringBuilder()
+
+            for ((index, bankItem) in bankList.withIndex()) {
+                sb.append(bankItem.id)
+                if (index < bankList.size - 1) {
+                    sb.append(",")
+                }
+            }
+
+            val adapter = InventoryAdapter(activity, bankList, cachedBankItems.bankItems)
+            rvBank.adapter = adapter
+            rvBank.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
+
+                val itemList = cachedBankItems!!.bankItems
+                if (itemList[pos] as Item? != null) {
+                    val intent = Intent(activity, ItemDetailActivity::class.java)
+                    intent.putExtra("item", itemList[pos])
+                    startActivity(intent)
+                }
+            }))
 
             pbLoading.visibility = View.GONE
             rvBank.visibility = View.VISIBLE
 
-            val adapter = InventoryAdapter(activity, cachedBank.bankItems)
-            rvBank.adapter = adapter
-            rvBank.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
-
-                val inventoryList = cachedBank!!.bankItems
-                if (inventoryList[pos] as Inventory? != null) {
-                    val intent = Intent(activity, ItemDetailActivity::class.java)
-                    intent.putExtra("item", inventoryList[pos])
-                    startActivity(intent)
-                }
-            }))
         } else {
 
             Log.d("BankFragment", "Loading from web")
 
             val accountService = Utils.getRetrofit(true).create(AccountService::class.java)
+            val itemService = Utils.getRetrofit(true).create(ItemService::class.java)
             accountService.getBank(Utils.getApiKeyForAuth(activity)).enqueue(object : Callback<List<Inventory>> {
                 override fun onResponse(call: Call<List<Inventory>>, response: Response<List<Inventory>>) {
                     if (response.isSuccessful) {
 
-                        pbLoading.visibility = View.GONE
-                        rvBank.visibility = View.VISIBLE
+                        val bankInventoryList = response.body()
 
-                        val bankList = ArrayList(response.body())
+                        val bankList = ArrayList(bankInventoryList)
                         bankList.removeAll(Collections.singleton(null))
-                        val adapter = InventoryAdapter(activity, bankList)
-                        rvBank.adapter = adapter
-                        rvBank.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
 
-                            val inventoryList = response.body()
-                            if (inventoryList[pos] as Inventory? != null) {
-                                val intent = Intent(activity, ItemDetailActivity::class.java)
-                                intent.putExtra("item", inventoryList[pos])
-                                startActivity(intent)
+                        val sb = StringBuilder()
+
+                        for ((index, bankItem) in bankList.withIndex()) {
+                            sb.append(bankItem.id)
+                            if (index < bankList.size - 1) {
+                                sb.append(",")
                             }
-                        }))
+                        }
 
-                        storageManager.saveBank(response.body())
+                        itemService.getItemsById(sb.toString()).enqueue(object: Callback<List<Item>>{
+                            override fun onResponse(call: Call<List<Item>>?, response: Response<List<Item>>) {
+                                if (response.isSuccessful) {
+                                    val itemList = ArrayList(response.body())
+
+                                    /* the GW2 items API doesn't return duplicate entries like the inventory one
+                                       does when items are at stacking capacity (typically 250), so we have to add the
+                                       other stack into the itemList manually
+                                     */
+                                    for ((index, inventory) in bankList.withIndex()) {
+                                        if (inventory.id != itemList[index].id) {
+                                            itemList.add(index, itemList.filter { it.id == inventory.id }.firstOrNull())
+                                        }
+                                    }
+
+                                    pbLoading.visibility = View.GONE
+                                    rvBank.visibility = View.VISIBLE
+
+                                    val adapter = InventoryAdapter(activity, bankList, itemList)
+                                    rvBank.adapter = adapter
+                                    rvBank.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
+                                        if (itemList[pos] as Item? != null) {
+                                            val intent = Intent(activity, ItemDetailActivity::class.java)
+                                            intent.putExtra("item", itemList[pos])
+                                            startActivity(intent)
+                                        }
+                                    }))
+
+                                    storageManager.saveBankItems(itemList)
+                                    storageManager.saveBank(bankList)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<List<Item>>?, t: Throwable?) {
+                                pbLoading.visibility = View.GONE
+                                rvBank.visibility = View.VISIBLE
+                            }
+
+                        })
                     }
                 }
 

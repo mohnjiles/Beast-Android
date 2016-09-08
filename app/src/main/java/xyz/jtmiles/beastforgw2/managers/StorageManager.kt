@@ -128,7 +128,7 @@ class StorageManager(private val mContext: Context){
             bufferedReader.close()
 
         } catch (ex: Exception){
-            Log.w("StorageManager", "Error loading wallet")
+            Log.w("StorageManager", "Error loading currency")
         }
 
         val listType = object: TypeToken<CachedCurrencyList>() {}.type
@@ -155,7 +155,7 @@ class StorageManager(private val mContext: Context){
         }
     }
 
-    fun loadBank() : CachedBankItems {
+    fun loadBank() : CachedInventory {
         val fileName = "bank.json"
         val gson = Gson()
         val sb = StringBuilder()
@@ -171,16 +171,35 @@ class StorageManager(private val mContext: Context){
             bufferedReader.close()
 
         } catch (ex: Exception){
-            Log.w("StorageManager", "Error loading wallet")
+            Log.w("StorageManager", "Error loading bank")
         }
 
-        val listType = object: TypeToken<CachedBankItems>() {}.type
+        val listType = object: TypeToken<CachedInventory>() {}.type
 
-        return gson.fromJson<CachedBankItems>(sb.toString(), listType)
+        return gson.fromJson<CachedInventory>(sb.toString(), listType)
     }
 
     fun saveBank(bankItems: List<Inventory>) {
         val fileName = "bank.json"
+        val gson = Gson()
+
+        val cachedBankItems = CachedInventory(inventory = bankItems, lastUpdated = Date())
+        val json = gson.toJson(cachedBankItems)
+
+        try {
+            val outputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE)
+            outputStream.write(json.toByteArray())
+            outputStream.close()
+        } catch (ex: Exception){
+            Log.w("StorageManager", "Error creating file: ${ex.message}")
+        }
+    }
+
+    fun saveBankItems(bankItems: List<Item>) {
+
+        val startTime = System.nanoTime()
+
+        val fileName = "bankitems.json"
         val gson = Gson()
 
         val cachedBankItems = CachedBankItems(bankItems = bankItems, lastUpdated = Date())
@@ -193,5 +212,120 @@ class StorageManager(private val mContext: Context){
         } catch (ex: Exception){
             Log.w("StorageManager", "Error creating file: ${ex.message}")
         }
+
+        val endTime = System.nanoTime()
+        Log.d("StorageManager", "saveBankItems took ${(endTime - startTime) / 1000000} millis")
     }
+
+    fun loadBankItems() : CachedBankItems {
+        val startTime = System.nanoTime()
+
+        val fileName = "bankitems.json"
+        val gson = Gson()
+        val sb = StringBuilder()
+
+        try {
+            val file = File("${mContext.filesDir.absolutePath}/$fileName")
+            val bufferedReader = BufferedReader(FileReader(file))
+            var line = bufferedReader.readLine()
+            while(line != null) {
+                sb.append(line)
+                line = bufferedReader.readLine()
+            }
+            bufferedReader.close()
+
+        } catch (ex: Exception){
+            Log.w("StorageManager", "Error loading bank items")
+        }
+
+        val listType = object: TypeToken<CachedBankItems>() {}.type
+        val cachedBankItems = gson.fromJson<CachedBankItems>(sb.toString(), listType)
+
+        val endTime = System.nanoTime()
+        Log.d("StorageManager", "loadBankItems took ${(endTime - startTime) / 1000000} millis")
+
+        return cachedBankItems
+    }
+
+    fun saveInventoryItems(inventoryList: List<Item>, characterName: String) {
+        val fileName = "inventory_items_$characterName.json"
+        val gson = Gson()
+
+        val cachedBankItems = CachedInventoryItems(itemList = inventoryList, lastUpdated = Date())
+        val json = gson.toJson(cachedBankItems)
+
+        try {
+            val outputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE)
+            outputStream.write(json.toByteArray())
+            outputStream.close()
+        } catch (ex: Exception){
+            Log.w("StorageManager", "Error creating file: ${ex.message}")
+        }
+    }
+
+    fun loadInventoryItems(characterName: String) : CachedInventoryItems {
+        val fileName = "inventory_items_$characterName.json"
+        val gson = Gson()
+        val sb = StringBuilder()
+
+        try {
+            val file = File("${mContext.filesDir.absolutePath}/$fileName")
+            val bufferedReader = BufferedReader(FileReader(file))
+            var line = bufferedReader.readLine()
+            while(line != null) {
+                sb.append(line)
+                line = bufferedReader.readLine()
+            }
+            bufferedReader.close()
+
+        } catch (ex: Exception){
+            Log.w("StorageManager", "Error loading inventory")
+        }
+
+        val listType = object: TypeToken<CachedInventoryItems>() {}.type
+
+        return gson.fromJson<CachedInventoryItems>(sb.toString(), listType)
+    }
+
+    fun saveInventory(inventoryList: List<Inventory>, characterName: String) {
+        val fileName = "inventory_$characterName.json"
+        val gson = Gson()
+
+        val cachedBankItems = CachedInventory(inventory = inventoryList, lastUpdated = Date())
+        val json = gson.toJson(cachedBankItems)
+
+        try {
+            val outputStream = mContext.openFileOutput(fileName, Context.MODE_PRIVATE)
+            outputStream.write(json.toByteArray())
+            outputStream.close()
+        } catch (ex: Exception){
+            Log.w("StorageManager", "Error creating file: ${ex.message}")
+        }
+    }
+
+    fun loadInventory(characterName: String) : CachedInventory {
+        val fileName = "inventory_$characterName.json"
+        val gson = Gson()
+        val sb = StringBuilder()
+
+        try {
+            val file = File("${mContext.filesDir.absolutePath}/$fileName")
+            val bufferedReader = BufferedReader(FileReader(file))
+            var line = bufferedReader.readLine()
+            while(line != null) {
+                sb.append(line)
+                line = bufferedReader.readLine()
+            }
+            bufferedReader.close()
+
+        } catch (ex: Exception){
+            Log.w("StorageManager", "Error loading inventory")
+        }
+
+        val listType = object: TypeToken<CachedInventory>() {}.type
+
+        return gson.fromJson<CachedInventory>(sb.toString(), listType)
+    }
+
+
 }

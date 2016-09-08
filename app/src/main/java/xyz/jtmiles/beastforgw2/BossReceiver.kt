@@ -8,7 +8,8 @@ import android.content.Intent
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.TaskStackBuilder
 import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
+import org.joda.time.Period
+import org.joda.time.format.PeriodFormatterBuilder
 import xyz.jtmiles.beastforgw2.activities.MainActivity
 import xyz.jtmiles.beastforgw2.models.WorldBoss
 
@@ -23,9 +24,17 @@ class BossReceiver : BroadcastReceiver() {
         builder.setAutoCancel(true)
 
 
-        val timeAtSpawn = boss.start!!.withZone(DateTimeZone.getDefault()).minuteOfHour - DateTime.now(DateTimeZone.getDefault()).minuteOfHour
+        val start = boss.start
+        val end = DateTime()
+        val p = Period(start, end)
+        val periodFormatter = PeriodFormatterBuilder()
+                .appendHours()
+                .appendSuffix("h").appendSeparator(" ")
+                .appendMinutes().appendSuffix("m").toFormatter()
 
-        builder.setContentText("${boss.eventName} spawning in $timeAtSpawn minutes")
+        val timeString = p.toString(periodFormatter)
+
+        builder.setContentText("${boss.eventName} spawning in $timeString")
 
         val resultIntent = Intent(context, MainActivity::class.java)
         resultIntent.putExtra("DoBossFragment", true)

@@ -15,7 +15,9 @@ import android.widget.Toast
 import org.jetbrains.anko.onFocusChange
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
+import org.joda.time.Period
 import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.PeriodFormatterBuilder
 import xyz.jtmiles.beastforgw2.BossReceiver
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.models.WorldBoss
@@ -85,9 +87,17 @@ class TimerDialogFragment  : DialogFragment() {
 
             if (timeAfterDelay <= DateTime.now(DateTimeZone.getDefault())) {
 
-                val bossStartsIn = boss.start!!.withZone(DateTimeZone.getDefault()).minuteOfHour - DateTime.now(DateTimeZone.getDefault()).minuteOfHour
+                val start = boss.start
+                val end = DateTime()
+                val p = Period(end, start)
+                val periodFormatter = PeriodFormatterBuilder()
+                        .appendHours()
+                        .appendSuffix(" hr").appendSeparator(" and ")
+                        .appendMinutes().appendSuffix(" minutes").toFormatter()
 
-                Toast.makeText(activity, "Sorry, you cannot set a timer for $delay minutes when the boss starts in $bossStartsIn minutes.", Toast.LENGTH_SHORT).show()
+                val timeString = p.toString(periodFormatter)
+
+                Toast.makeText(activity, "Sorry, you cannot set a timer for $delay minutes when the boss starts in $timeString.", Toast.LENGTH_SHORT).show()
             } else {
 
                 val alarmMgr = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager

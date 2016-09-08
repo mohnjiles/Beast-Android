@@ -2,7 +2,7 @@ package xyz.jtmiles.beastforgw2.models
 
 import java.util.*
 
-data class CachedBankItems(
-        val bankItems: List<Item>,
+data class CachedInventory(
+        val inventory: List<Inventory>,
         val lastUpdated: Date
 )
