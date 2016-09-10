@@ -46,7 +46,8 @@ class CharacterDetailActivity : AppCompatActivity() {
         var mCharacter = intent.extras?.getSerializable("character")
         if (mCharacter != null) {
             mCharacter = mCharacter as Character
-            supportActionBar?.title = mCharacter.name
+            supportActionBar?.title = "Beast for GW2"
+            supportActionBar?.subtitle = mCharacter.name
         }
     }
 

@@ -15,7 +15,6 @@ import android.widget.ProgressBar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import xyz.jtmiles.beastforgw2.ItemOffsetDecoration
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.activities.ItemDetailActivity
 import xyz.jtmiles.beastforgw2.adapters.InventoryAdapter
@@ -49,15 +48,20 @@ class BankFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val orientation = resources.configuration.orientation
         val storageManager = StorageManager(activity)
 
-        if (orientation == Configuration.ORIENTATION_PORTRAIT)
-            rvBank.layoutManager = GridLayoutManager(activity, 4)
-        else rvBank.layoutManager = GridLayoutManager(activity, 6)
+        val orientation = context.resources.configuration.orientation
 
-        val itemDecoration = ItemOffsetDecoration(activity, R.dimen.grid_padding)
-        rvBank.addItemDecoration(itemDecoration)
+        when (orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> {
+                val gridLayoutManager = GridLayoutManager(activity, 4)
+                rvBank.layoutManager = gridLayoutManager
+            }
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                val gridLayoutManager = GridLayoutManager(activity, 6)
+                rvBank.layoutManager = gridLayoutManager
+            }
+        }
 
         var cachedBank: CachedInventory? = null
         try {
@@ -74,7 +78,7 @@ class BankFragment : Fragment() {
         }
 
         if (cachedBank != null && cachedBankItems != null && cachedBankItems.bankItems.size > 0
-                && (Date().time - cachedBank.lastUpdated.time) <  5 * 60 * 1000) {
+                && (Date().time - cachedBank.lastUpdated.time) < 5 * 60 * 1000) {
 
             Log.d("BankFragment", "Loading from cache")
 
@@ -128,7 +132,7 @@ class BankFragment : Fragment() {
                             }
                         }
 
-                        itemService.getItemsById(sb.toString()).enqueue(object: Callback<List<Item>>{
+                        itemService.getItemsById(sb.toString()).enqueue(object : Callback<List<Item>> {
                             override fun onResponse(call: Call<List<Item>>?, response: Response<List<Item>>) {
                                 if (response.isSuccessful) {
                                     val itemList = ArrayList(response.body())

@@ -42,13 +42,13 @@ class CharacterDetailFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(activity)
         rvStats.layoutManager = layoutManager
+        rvStats.setHasFixedSize(true)
 
 
         tvCharacterName.text = mCharacter?.name
         tvCharacterRaceClass.text = "${mCharacter?.level} ${mCharacter?.race} ${mCharacter?.profession}"
         ivClassIcon.setImageResource(Utils.getResourceIdByName(activity, mCharacter?.profession!!))
 
-        rvStats.addItemDecoration(VerticalSpaceItemDecoration(32))
         rvStats.adapter = CharacterInfoAdapter(mCharacter!!)
     }
 

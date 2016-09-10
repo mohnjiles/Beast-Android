@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.models.Attribute
 import xyz.jtmiles.beastforgw2.models.Item
@@ -40,7 +41,19 @@ class ItemDetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val item = intent.extras.getSerializable("item") as Item? ?: return
+        val gson = Gson()
+
+        val theObject = intent.extras.getSerializable("item")
+
+        val item = if (theObject is Item)
+                        theObject
+                    else if (theObject is String)
+                        gson.fromJson(intent.extras.getSerializable("item") as String?, Item::class.java)
+                    else return
+
+//        as Item?
+//                ?: gson.fromJson(intent.extras.getSerializable("item") as String?, Item::class.java)
+//                ?: return
 
         rlItemDetails.visibility = View.VISIBLE
         rlLoading.visibility = View.GONE

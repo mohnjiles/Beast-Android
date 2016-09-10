@@ -146,6 +146,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             supportFragmentManager.beginTransaction().replace(R.id.container, NewsFragment.newInstance(), "NewsFragment").commit()
             mCurrentFragmentTag = "NewsFragment"
         }
+//        } else if (id == R.id.nav_misc) {
+//            supportActionBar?.subtitle = "Misc Account Details"
+//            supportFragmentManager.beginTransaction().replace(R.id.container, MiscAccountDetailsFragment.newInstance(), "MiscAccountDetailsFragment").commit()
+//            mCurrentFragmentTag = "MiscAccountDetailsFragment"
+//        }
 
         drawer.closeDrawer(GravityCompat.START)
         return true

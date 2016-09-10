@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import kotlinx.android.synthetic.main.character_info_layout.view.*
 import org.joda.time.DateTime
 import org.joda.time.Period
 import org.joda.time.format.PeriodFormatterBuilder
@@ -45,18 +46,18 @@ class CharacterInfoAdapter(val mCharacter: Character) : RecyclerView.Adapter<Cha
                 holder.ivInfoImage.setImageResource(R.drawable.skull)
                 holder.tvTitle.text = "Deaths"
                 holder.tvContent.text = mCharacter.deaths.toString()
-                holder.rlLayout.setBackgroundColor(Color.parseColor("#b71c1c"))
+                holder.itemView.cvCharacter.setCardBackgroundColor(Color.parseColor("#b71c1c"))
             }
             1 -> {
                 holder.ivInfoImage.setImageResource(R.drawable.ic_timer_white_48dp_2x)
                 holder.tvTitle.text = "Time Played"
                 holder.tvContent.text = String.format(Locale.getDefault(), "%d Hours", mCharacter.age!! / 60 / 60)
-                holder.rlLayout.setBackgroundColor(Color.parseColor("#311b92"))
+                holder.itemView.cvCharacter.setCardBackgroundColor(Color.parseColor("#311b92"))
             }
             2 -> {
                 holder.ivInfoImage.setImageResource(R.drawable.ic_people_white_48dp_2x)
                 holder.tvTitle.text = "Guild"
-                holder.rlLayout.setBackgroundColor(Color.parseColor("#F9A825"))
+                holder.itemView.cvCharacter.setCardBackgroundColor(Color.parseColor("#F9A825"))
 
                 guildService?.getGuildDetails("https://api.guildwars2.com/v1/guild_details.json?guild_id=${mCharacter.guild}")!!.enqueue(object : Callback<Guild> {
                         override fun onResponse(call: Call<Guild>, response: Response<Guild>) {
@@ -75,7 +76,7 @@ class CharacterInfoAdapter(val mCharacter: Character) : RecyclerView.Adapter<Cha
             3 -> {
                 holder.ivInfoImage.setImageResource(R.drawable.ic_add_white_48dp_2x)
                 holder.tvTitle.text = "Created"
-                holder.rlLayout.setBackgroundColor(Color.parseColor("#1b5e20"))
+                holder.itemView.cvCharacter.setCardBackgroundColor(Color.parseColor("#1b5e20"))
 
                 val start = DateTime(mCharacter.created!!)
                 val end = DateTime()

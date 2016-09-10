@@ -3,22 +3,25 @@ package xyz.jtmiles.beastforgw2.models
 import java.io.Serializable
 import java.util.*
 
-class Item : Serializable {
+data class Item (
+        val name: String?,
+        var description: String?,
+        val type: String?,
+        val level: Int?,
+        val rarity: String?,
+        val vendorValue: Int?,
+        val defaultSkin: Int?,
+        val gameTypes: List<String>,
+        val flags: List<String>,
+        val restrictions: List<String>,
+        val id: Int?,
+        val chatLink: String?,
+        val icon: String?,
+        val details: Details?
+        
+) : Serializable {
 
-    var name: String? = null
-    var description: String? = null
-    var type: String? = null
-    var level: Int? = null
-    var rarity: String? = null
-    var vendorValue: Int? = null
-    var defaultSkin: Int? = null
-    var gameTypes: List<String> = ArrayList()
-    var flags: List<String> = ArrayList()
-    var restrictions: List<Any> = ArrayList()
-    var id: Int? = null
-    var chatLink: String? = null
-    var icon: String? = null
-    var details: Details? = null
+
 
     companion object {
         private val serialVersionUID = 0L

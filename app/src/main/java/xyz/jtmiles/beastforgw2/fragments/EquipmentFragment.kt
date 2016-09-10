@@ -110,6 +110,7 @@ class EquipmentFragment : Fragment() {
 
         imageView.setOnClickListener {
             val intent = Intent(activity, ItemDetailActivity::class.java)
+            item.description = item.description?.replace("<c=@flavor>", "")?.replace("</c>", "")?.replace("<br>", "")
             intent.putExtra("item", item)
             startActivity(intent)
         }

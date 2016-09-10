@@ -2,6 +2,7 @@ package xyz.jtmiles.beastforgw2.fragments
 
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -54,8 +55,18 @@ class InventoryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         rvInventory.setHasFixedSize(true)
-        val gridLayoutManager = GridLayoutManager(activity, 4)
-        rvInventory.layoutManager = gridLayoutManager
+        val orientation = context.resources.configuration.orientation
+
+        when (orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> {
+                val gridLayoutManager = GridLayoutManager(activity, 4)
+                rvInventory.layoutManager = gridLayoutManager
+            }
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                val gridLayoutManager = GridLayoutManager(activity, 6)
+                rvInventory.layoutManager = gridLayoutManager
+            }
+        }
 
         val storageManager = StorageManager(activity)
         var cachedInventory: CachedInventory? = null

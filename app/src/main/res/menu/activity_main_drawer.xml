@@ -14,23 +14,24 @@
             android:id="@+id/nav_bank"
             android:icon="@drawable/ic_account_balance_white_24dp"
             android:title="Bank" />
-    </group>
+        <!--<item-->
+            <!--android:id="@+id/nav_misc"-->
+            <!--android:icon="@drawable/ic_add_white_48dp_2x"-->
+            <!--android:title="Misc Account Details" />-->
 
-    <item android:title="Other">
-        <menu>
-            <item
-                android:id="@+id/nav_boss_timers"
-                android:icon="@drawable/ic_timer_white_24dp"
-                android:title="Boss Timers" />
-            <item
-                android:id="@+id/nav_news"
-                android:icon="@drawable/newspaper"
-                android:title="News" />
-            <item
-                android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_settings_white_24dp"
-                android:title="Settings" />
-        </menu>
-    </item>
+
+        <item
+            android:id="@+id/nav_boss_timers"
+            android:icon="@drawable/ic_timer_white_24dp"
+            android:title="Boss Timers" />
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/newspaper"
+            android:title="News" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="Settings" />
+    </group>
 
 </menu>
