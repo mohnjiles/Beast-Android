@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,6 +35,7 @@ import java.util.*
 class InventoryFragment : Fragment() {
 
     val rvInventory: RecyclerView by bindView(R.id.rvInventory)
+    val pbLoading: ProgressBar by bindView(R.id.pbLoading)
 
     private var mCharacter: Character? = null
 
@@ -95,6 +97,9 @@ class InventoryFragment : Fragment() {
                 startActivity(intent)
             }))
 
+            pbLoading.visibility = View.INVISIBLE
+            rvInventory.visibility = View.VISIBLE
+
         } else {
             Log.d("InventoryFragment" , "Loading from web")
             val inventoryList = ArrayList<Inventory>()
@@ -139,6 +144,9 @@ class InventoryFragment : Fragment() {
                             intent.putExtra("item", itemList[pos])
                             startActivity(intent)
                         }))
+
+                        pbLoading.visibility = View.INVISIBLE
+                        rvInventory.visibility = View.VISIBLE
 
                         storageManager.saveInventoryItems(itemList, mCharacter!!.name!!)
                         storageManager.saveInventory(inventoryList, mCharacter!!.name!!)

@@ -1,5 +1,6 @@
 package xyz.jtmiles.beastforgw2.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -145,12 +146,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             supportActionBar?.subtitle = "News"
             supportFragmentManager.beginTransaction().replace(R.id.container, NewsFragment.newInstance(), "NewsFragment").commit()
             mCurrentFragmentTag = "NewsFragment"
+        } else if (id == R.id.nav_misc) {
+            val intent = Intent(MainActivity@this, MiscAccountDetailsActivity::class.java)
+            startActivity(intent)
         }
-//        } else if (id == R.id.nav_misc) {
-//            supportActionBar?.subtitle = "Misc Account Details"
-//            supportFragmentManager.beginTransaction().replace(R.id.container, MiscAccountDetailsFragment.newInstance(), "MiscAccountDetailsFragment").commit()
-//            mCurrentFragmentTag = "MiscAccountDetailsFragment"
-//        }
 
         drawer.closeDrawer(GravityCompat.START)
         return true

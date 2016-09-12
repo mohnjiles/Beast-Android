@@ -34,4 +34,12 @@
             android:title="Settings" />
     </group>
 
+    <item android:title="Misc">
+        <menu>
+            <item android:title="Misc Account Details"
+                android:id="@+id/nav_misc"
+                android:icon="@drawable/ic_add_white_48dp_2x" />
+        </menu>
+    </item>
+
 </menu>

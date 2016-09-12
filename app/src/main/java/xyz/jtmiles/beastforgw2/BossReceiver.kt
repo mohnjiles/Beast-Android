@@ -26,7 +26,7 @@ class BossReceiver : BroadcastReceiver() {
 
         val start = boss.start
         val end = DateTime()
-        val p = Period(start, end)
+        val p = Period(end, start)
         val periodFormatter = PeriodFormatterBuilder()
                 .appendHours()
                 .appendSuffix("h").appendSeparator(" ")

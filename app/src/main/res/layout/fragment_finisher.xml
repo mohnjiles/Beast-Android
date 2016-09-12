@@ -1,16 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.InventoryFragment">
+    tools:context="xyz.jtmiles.beastforgw2.fragments.FinisherFragment">
 
-
+    <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:id="@+id/rvInventory"/>
-
+        android:id="@+id/rvFinishers" />
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
@@ -18,4 +16,5 @@
         android:id="@+id/pbLoading"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
-</RelativeLayout>
+
+</FrameLayout>
