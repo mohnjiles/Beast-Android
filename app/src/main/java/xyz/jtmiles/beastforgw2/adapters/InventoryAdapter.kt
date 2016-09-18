@@ -19,11 +19,13 @@ import xyz.jtmiles.beastforgw2.util.Utils
 
 class InventoryAdapter(val mContext: Context, val mInventoryList: List<Inventory>, val mItemList: List<Item>) : RecyclerView.Adapter<InventoryAdapter.ViewHolder>() {
 
+
     var itemService: ItemService? = null
 
     init {
         itemService = Utils.getRetrofit(true).create(ItemService::class.java)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(mContext).inflate(R.layout.inventory_item_layout, parent, false)
@@ -31,12 +33,9 @@ class InventoryAdapter(val mContext: Context, val mInventoryList: List<Inventory
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position >= mItemList.size) {
-            holder.bindInventory(mInventoryList[position], null)
-        } else {
             holder.bindInventory(mInventoryList[position], mItemList[position])
-        }
     }
+
 
     override fun getItemCount(): Int {
         return mInventoryList.size
@@ -48,6 +47,7 @@ class InventoryAdapter(val mContext: Context, val mInventoryList: List<Inventory
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
 
         fun bindInventory(inventory: Inventory?,  theItem: Item?) {
             if (inventory == null) {

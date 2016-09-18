@@ -18,6 +18,7 @@ import retrofit2.Response
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.activities.ItemDetailActivity
 import xyz.jtmiles.beastforgw2.models.Character
+import xyz.jtmiles.beastforgw2.models.Equipment
 import xyz.jtmiles.beastforgw2.models.Item
 import xyz.jtmiles.beastforgw2.models.Skin
 import xyz.jtmiles.beastforgw2.services.ItemService
@@ -56,22 +57,22 @@ class EquipmentFragment : Fragment() {
                     val item = itemResponse.body()
                     val skin = skinResponse?.body()
                     when (equipment.slot) {
-                        "Backpack" -> loadItem(item, skin, ivBackpack)
-                        "Coat" -> loadItem(item, skin, ivChest)
-                        "Boots" -> loadItem(item, skin, ivBoots)
-                        "Gloves" -> loadItem(item, skin, ivGloves)
-                        "Helm" -> loadItem(item, skin, ivHelm)
-                        "Leggings" -> loadItem(item, skin, ivPants)
-                        "Shoulders" -> loadItem(item, skin, ivShoulders)
-                        "Accessory1" -> loadItem(item, skin, ivAccessory1)
-                        "Accessory2" -> loadItem(item, skin, ivAccessory2)
-                        "Ring1" -> loadItem(item, skin, ivRing1)
-                        "Ring2" -> loadItem(item, skin, ivRing2)
-                        "Amulet" -> loadItem(item, skin, ivAmulet)
-                        "WeaponA1" -> loadItem(item, skin, ivWeapon1Slot1)
-                        "WeaponA2" -> loadItem(item, skin, ivWeapon1Slot2)
-                        "WeaponB1" -> loadItem(item, skin, ivWeapon2Slot1)
-                        "WeaponB2" -> loadItem(item, skin, ivWeapon2Slot2)
+                        "Backpack" -> loadItem(item, skin, equipment, ivBackpack)
+                        "Coat" -> loadItem(item, skin, equipment, ivChest)
+                        "Boots" -> loadItem(item, skin, equipment, ivBoots)
+                        "Gloves" -> loadItem(item, skin, equipment, ivGloves)
+                        "Helm" -> loadItem(item, skin, equipment, ivHelm)
+                        "Leggings" -> loadItem(item, skin, equipment, ivPants)
+                        "Shoulders" -> loadItem(item, skin, equipment, ivShoulders)
+                        "Accessory1" -> loadItem(item, skin, equipment, ivAccessory1)
+                        "Accessory2" -> loadItem(item, skin, equipment, ivAccessory2)
+                        "Ring1" -> loadItem(item, skin, equipment, ivRing1)
+                        "Ring2" -> loadItem(item, skin, equipment, ivRing2)
+                        "Amulet" -> loadItem(item, skin, equipment, ivAmulet)
+                        "WeaponA1" -> loadItem(item, skin, equipment, ivWeapon1Slot1)
+                        "WeaponA2" -> loadItem(item, skin, equipment, ivWeapon1Slot2)
+                        "WeaponB1" -> loadItem(item, skin, equipment, ivWeapon2Slot1)
+                        "WeaponB2" -> loadItem(item, skin, equipment, ivWeapon2Slot2)
                     }
 
                 }
@@ -80,7 +81,7 @@ class EquipmentFragment : Fragment() {
 
     }
 
-    private fun loadItem(item: Item?, skin: Skin?, imageView: ImageView?) {
+    private fun loadItem(item: Item?, skin: Skin?, equipment: Equipment, imageView: ImageView?) {
 
         if(imageView == null) return
 
@@ -112,6 +113,7 @@ class EquipmentFragment : Fragment() {
             val intent = Intent(activity, ItemDetailActivity::class.java)
             item.description = item.description?.replace("<c=@flavor>", "")?.replace("</c>", "")?.replace("<br>", "")
             intent.putExtra("item", item)
+            intent.putExtra("equipment", equipment)
             startActivity(intent)
         }
     }

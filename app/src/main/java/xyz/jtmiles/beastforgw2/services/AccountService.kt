@@ -29,4 +29,10 @@ interface AccountService {
     @GET("finishers")
     fun getFinishersById(@Query("ids") commaSeparatedIds: String) : Call<List<Finisher>>
 
+    @GET("account/minis")
+    fun getMinisIds(@Header("Authorization") auth: String) : Call<List<Int>>
+
+    @GET("minis")
+    fun getMinis(@Query("ids") commaSeparatedIds: String) : Call<List<Mini>>
+
 }

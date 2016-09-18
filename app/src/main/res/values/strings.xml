@@ -6,8 +6,6 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="api_key_help">Need help finding your API Key? <a href="https://account.arena.net/applications">Tap here to open the Guild Wars 2 API Key website.</a>
         \n\nHow do I generate an API Key?
         \n\nOn the Guild Wars 2 API key website, first login to your Guild Wars 2 account.
@@ -20,5 +18,8 @@
     <string name="timer_help">
         Please choose how long before {{boss_name}} you would like your reminder.
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

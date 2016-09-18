@@ -3,39 +3,25 @@ package xyz.jtmiles.beastforgw2.models
 import java.io.Serializable
 import java.util.*
 
-class Character : Serializable {
+data class Character (
 
-    var name: String? = null
-
-    var race: String? = null
-
-    var gender: String? = null
-
-    var profession: String? = null
-
-    var level: Int? = null
-
-    var guild: String? = null
-
-    var age: Int? = null
-
-    var created: String? = null
-
-    var deaths: Int? = null
-
-    var crafting: List<Crafting> = ArrayList()
-
-    var specializations: Specializations? = null
-
-    var skills: Skills? = null
-
-    var equipment: List<Equipment> = ArrayList()
-
-    var recipes: List<Int> = ArrayList()
-
-    var equipmentPvp: EquipmentPvp? = null
-
-    var bags: List<Bag> = ArrayList()
+    val name: String,
+    val race: String,
+    val gender: String,
+    val profession: String,
+    val level: Int,
+    val guild: String,
+    val age: Int,
+    val created: String,
+    val deaths: Int,
+    val crafting: List<Crafting>,
+    val specializations: Specializations,
+    val skills: Skills,
+    val equipment: List<Equipment>,
+    val recipes: List<Int>,
+    val equipmentPvp: EquipmentPvp,
+    val bags: List<Bag>
+): Serializable {
 
     companion object {
         private val serialVersionUID = 0L

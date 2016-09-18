@@ -41,16 +41,9 @@ class TitlesFragment : Fragment() {
         accountService.getTitleIds(Utils.getApiKeyForAuth(activity)).enqueue( object : Callback<List<Int>> {
             override fun onResponse(call: Call<List<Int>>?, response: Response<List<Int>>) {
                 if (response.isSuccessful) {
-                    val titleIds = response.body()
-                    val sb = StringBuilder()
-                    for ((index, id) in titleIds.withIndex()) {
-                        sb.append(id)
-                        if (index < titleIds.size - 1) {
-                            sb.append(",")
-                        }
-                    }
+                    val titleIds = response.body().joinToString(",")
 
-                    accountService.getTitlesById(sb.toString()).enqueue(object: Callback<List<Title>> {
+                    accountService.getTitlesById(titleIds).enqueue(object: Callback<List<Title>> {
                         override fun onResponse(call: Call<List<Title>>?, response: Response<List<Title>>) {
                             if (response.isSuccessful) {
                                 val titleList = response.body()

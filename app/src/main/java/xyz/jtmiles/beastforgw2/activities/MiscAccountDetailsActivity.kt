@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import xyz.jtmiles.beastforgw2.R
 import xyz.jtmiles.beastforgw2.fragments.FinisherFragment
+import xyz.jtmiles.beastforgw2.fragments.MinisFragment
 import xyz.jtmiles.beastforgw2.fragments.SettingsFragment
 import xyz.jtmiles.beastforgw2.fragments.TitlesFragment
 import xyz.jtmiles.beastforgw2.util.bindView
@@ -32,6 +33,7 @@ class MiscAccountDetailsActivity : AppCompatActivity() {
 
         val mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         mViewPager.adapter = mSectionsPagerAdapter
+        mViewPager.offscreenPageLimit = 2
 
         val tabLayout = findViewById(R.id.tabs) as TabLayout?
         tabLayout!!.setupWithViewPager(mViewPager)
@@ -58,7 +60,7 @@ class MiscAccountDetailsActivity : AppCompatActivity() {
             when (position) {
                 0 -> return TitlesFragment.newInstance()
                 1 -> return FinisherFragment.newInstance()
-                2 -> return SettingsFragment.newInstance()
+                2 -> return MinisFragment.newInstance()
             }
 
             return SettingsFragment.newInstance()
@@ -73,7 +75,7 @@ class MiscAccountDetailsActivity : AppCompatActivity() {
             when (position) {
                 0 -> return "Titles"
                 1 -> return "Finishers"
-                2 -> return "Stuff"
+                2 -> return "Minis"
             }
             return null
         }

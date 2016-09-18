@@ -6,6 +6,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.GridLayoutManager.SpanSizeLookup
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -50,19 +52,6 @@ class BankFragment : Fragment() {
 
         val storageManager = StorageManager(activity)
 
-        val orientation = context.resources.configuration.orientation
-
-        when (orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> {
-                val gridLayoutManager = GridLayoutManager(activity, 4)
-                rvBank.layoutManager = gridLayoutManager
-            }
-            Configuration.ORIENTATION_LANDSCAPE -> {
-                val gridLayoutManager = GridLayoutManager(activity, 6)
-                rvBank.layoutManager = gridLayoutManager
-            }
-        }
-
         var cachedBank: CachedInventory? = null
         try {
             cachedBank = storageManager.loadBank()
@@ -83,17 +72,21 @@ class BankFragment : Fragment() {
             Log.d("BankFragment", "Loading from cache")
 
             val bankList = cachedBank.inventory
+            val adapter = InventoryAdapter(activity, bankList, cachedBankItems.bankItems)
 
-            val sb = StringBuilder()
+            val orientation = context.resources.configuration.orientation
 
-            for ((index, bankItem) in bankList.withIndex()) {
-                sb.append(bankItem.id)
-                if (index < bankList.size - 1) {
-                    sb.append(",")
+            when (orientation) {
+                Configuration.ORIENTATION_PORTRAIT -> {
+                    val gridLayoutManager = GridLayoutManager(activity, 4)
+                    rvBank.layoutManager = gridLayoutManager
+                }
+                Configuration.ORIENTATION_LANDSCAPE -> {
+                    val gridLayoutManager = GridLayoutManager(activity, 6)
+                    rvBank.layoutManager = gridLayoutManager
                 }
             }
 
-            val adapter = InventoryAdapter(activity, bankList, cachedBankItems.bankItems)
             rvBank.adapter = adapter
             rvBank.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
 
@@ -121,11 +114,16 @@ class BankFragment : Fragment() {
                         val bankInventoryList = response.body()
 
                         val bankList = ArrayList(bankInventoryList)
-                        bankList.removeAll(Collections.singleton(null))
+                        //bankList.removeAll(Collections.singleton(null))
 
                         val sb = StringBuilder()
 
                         for ((index, bankItem) in bankList.withIndex()) {
+
+                            if (bankItem == null) {
+                                continue
+                            }
+
                             sb.append(bankItem.id)
                             if (index < bankList.size - 1) {
                                 sb.append(",")
@@ -142,8 +140,17 @@ class BankFragment : Fragment() {
                                        other stack into the itemList manually
                                      */
                                     for ((index, inventory) in bankList.withIndex()) {
-                                        if (inventory.id != itemList[index].id) {
-                                            itemList.add(index, itemList.filter { it.id == inventory.id }.firstOrNull())
+
+                                        if (inventory == null) {
+                                            itemList.add(index, null)
+                                            continue
+                                        }
+
+                                        if (itemList[index] != null && inventory.id != itemList[index].id) {
+                                            itemList.add(index, itemList.filter {
+                                                if (it == null) return
+                                                it.id == inventory.id
+                                            }.firstOrNull())
                                         }
                                     }
 

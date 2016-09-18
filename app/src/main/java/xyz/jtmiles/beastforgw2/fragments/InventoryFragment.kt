@@ -94,6 +94,7 @@ class InventoryFragment : Fragment() {
             rvInventory.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
                 val intent = Intent(activity, ItemDetailActivity::class.java)
                 intent.putExtra("item", itemList[pos])
+                intent.putExtra("inventory", inventory[pos])
                 startActivity(intent)
             }))
 
@@ -142,6 +143,7 @@ class InventoryFragment : Fragment() {
                         rvInventory.addOnItemTouchListener(RecyclerItemClickListener(activity, RecyclerItemClickListener.OnItemClickListener { view, pos ->
                             val intent = Intent(activity, ItemDetailActivity::class.java)
                             intent.putExtra("item", itemList[pos])
+                            intent.putExtra("inventory", inventoryList[pos])
                             startActivity(intent)
                         }))
 
